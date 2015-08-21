@@ -65,7 +65,7 @@ namespace Fluffy
 
         public void ChangeToLevelSelection()
         {
-            Application.LoadLevel("Level Selection");
+            Application.LoadLevel("Main Menu");
         }
     }
 }
