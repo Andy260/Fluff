@@ -10,6 +10,15 @@ namespace Fluffy
 
         Player _player;
 
+        bool _levelEnded = false;
+        public bool levelEnded
+        {
+            get
+            {
+                return _levelEnded;
+            }
+        }
+
         int _explosionCount = 0;
         public int explosionCount
         {

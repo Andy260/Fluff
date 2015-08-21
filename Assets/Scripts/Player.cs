@@ -18,6 +18,10 @@ namespace Fluffy
 
         private bool _hasFocus                  = true;     // Whether or not the game window is currently in focus
 
+        private GUISystem _guiSystem;
+
+        public GameObject _rangeDisplay;
+
         /// <summary>
         /// The current sheep count
         /// </summary>
@@ -36,42 +40,83 @@ namespace Fluffy
         void Start()
         {
             _camera = GetComponentInChildren<Camera>();
+
+            _guiSystem = GameObject.Find("GUI System").GetComponent<GUISystem>();
         }
 
         void Update()
         {
+            if (!_hasFocus || _guiSystem.levelEnded)
+            {
+                return;
+            }
+
             Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
             Debug.DrawLine(ray.origin, ray.origin + (ray.direction * 20.0f), new Color(1.0f, 1.0f, 1.0f));
 
-            if (Input.GetMouseButtonDown(0)             && 
-                _hasFocus                               && 
-                _explosivesCount < _explosivesTotal)
+            if (Input.GetMouseButtonDown(0) && 
+                    _explosivesCount < _explosivesTotal)
             {
-                RaycastHit raycastHit;
+                ExplodeObject(ray);
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                ShowSheepRange(ray);
+            }
+        }
 
-                if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
-                        _explodableLayerMask))
+        void ExplodeObject(Ray a_ray)
+        {
+            RaycastHit raycastHit;
+
+            if (Physics.Raycast(a_ray, out raycastHit, Mathf.Infinity,
+                    _explodableLayerMask))
+            {
+                GameObject hitObject = raycastHit.transform.gameObject;
+
+                if (hitObject.tag == "Sheep")
                 {
-                    GameObject hitObject = raycastHit.transform.gameObject;
+                    // Sheep
+                    Sheep sheep = hitObject.GetComponent<Sheep>();
 
-                    if (hitObject.tag == "Sheep")
-                    {
-                        // Sheep
-                        Sheep sheep = hitObject.GetComponent<Sheep>();
+                    sheep.Explode();
+                }
+                else
+                {
+                    // Crate
+                    Crate crate = hitObject.GetComponent<Crate>();
 
-                        sheep.Explode();
-                    }
-                    else
-                    {
-                        // Crate
-                        Crate crate = hitObject.GetComponent<Crate>();
-
-                        crate.Explode();
-                    }
+                    crate.Explode();
                 }
 
                 _explosivesCount++;
+            }
+        }
+
+        void ShowSheepRange(Ray a_ray)
+        {
+            RaycastHit raycastHit;
+
+            if (Physics.Raycast(a_ray, out raycastHit, Mathf.Infinity,
+                    _explodableLayerMask))
+            {
+                GameObject hitObject = raycastHit.transform.gameObject;
+
+                if (hitObject.tag != "Sheep")
+                {
+                    return;
+                }
+
+                Sheep sheep = hitObject.GetComponent<Sheep>();
+
+                // Create range display game object
+                GameObject rangeDisplayObject = Instantiate(_rangeDisplay, 
+                    sheep.transform.position, new Quaternion()) as GameObject;
+
+                // Set range display range
+                RangeDisplay rangeDisplay = rangeDisplayObject.GetComponent<RangeDisplay>();
+                rangeDisplay._range = sheep.range;
             }
         }
 
