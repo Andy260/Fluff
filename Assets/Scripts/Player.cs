@@ -51,8 +51,6 @@ namespace Fluffy
                 {
                     GameObject hitObject = raycastHit.transform.gameObject;
 
-                    Debug.Log("Hit object:" + hitObject.name);
-
                     if (hitObject.tag == "Sheep")
                     {
                         // Sheep
