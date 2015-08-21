@@ -12,7 +12,18 @@ namespace Fluffy
         {
             _sheep = transform.GetComponentInChildren<Sheep>();
 
-            // Ensure sheep is hide on scene start
+#if UNITY_EDITOR
+            // Prevents bug where infinite explosion objects are created
+            if (_sheep == null)
+            {
+                Debug.LogError("Sheep object attached to crate must be active, or no sheep attached!");
+                Debug.Break();
+
+                return;
+            }
+#endif
+
+            // Ensure sheep is hidden on scene start
             _sheep.gameObject.SetActive(false);
         }
 
@@ -29,7 +40,7 @@ namespace Fluffy
 
             // Create explosion
             Explosion explosion     = explosionObject.GetComponent<Explosion>();
-            explosion.sheepToShow   = _sheep;
+            explosion.sheepToShow = _sheep;
 
             // Unparent hidden sheep
             _sheep.transform.SetParent(null);
