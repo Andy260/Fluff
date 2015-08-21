@@ -28,8 +28,8 @@ namespace Fluffy
                 Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f))) as GameObject;
 
             // Create explosion
-            Explosion explosion = explosionObject.GetComponent<Explosion>();
-            explosion.sheepToShow = _sheep;
+            Explosion explosion     = explosionObject.GetComponent<Explosion>();
+            explosion.sheepToShow   = _sheep;
 
             // Unparent hidden sheep
             _sheep.transform.SetParent(null);
