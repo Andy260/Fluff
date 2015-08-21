@@ -10,7 +10,10 @@ namespace Fluffy
 
         void Start()
         {
+            _sheep = transform.GetComponentInChildren<Sheep>();
 
+            // Ensure sheep is hide on scene start
+            _sheep.gameObject.SetActive(false);
         }
 
         void Update()
@@ -23,6 +26,9 @@ namespace Fluffy
             // Create explosion object
             GameObject explosionObject = Instantiate(_explosion, transform.position,
                 Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f))) as GameObject;
+
+            Explosion explosion = explosionObject.GetComponent<Explosion>();
+            explosion.sheep     = _sheep;
 
             // Destroy this object
             Destroy(this.gameObject);

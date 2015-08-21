@@ -75,10 +75,5 @@ namespace Fluffy
         {
             _hasFocus = a_focus;
         }
-
-        void ExplodeObject(GameObject a_gameObject)
-        {
-
-        }
     }
 }
