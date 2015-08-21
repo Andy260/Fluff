@@ -20,16 +20,23 @@ namespace Fluffy
 
         List<GameObject> _effectedObjects;
 
+        Player _player;
+
         void Start()
         {
             // Increment count of sheep within level
-            Player player = GameObject.Find("Player").GetComponent<Player>();
-            player.sheepCount += 1;
+            _player = GameObject.Find("Player").GetComponent<Player>();
+            _player.sheepCount += 1;
 
             // Get range
             SphereCollider collider = GetComponent<SphereCollider>();
             _range = collider.radius;
             Destroy(collider);
+        }
+
+        public void OnDestroy()
+        {
+            _player.sheepCount -= 1;
         }
 
         void Update()
@@ -45,6 +52,8 @@ namespace Fluffy
 
             Explosion explosion = explosionObject.GetComponent<Explosion>();
             explosion.range = _range;
+
+
 
             // Destroy this object
             Destroy(this.gameObject);

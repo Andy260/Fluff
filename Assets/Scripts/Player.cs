@@ -10,7 +10,7 @@ namespace Fluffy
 
         public LayerMask _explodableLayerMask;              // Represents which Unity layered gameObjects may be exploded
 
-        private int _explosivesCount            = 0;        // Represents the current number of explosives
+        public int _explosivesCount            = 0;         // Represents the current number of explosives
 
         private Camera _camera;                             // Should be the main camera
 
@@ -44,11 +44,13 @@ namespace Fluffy
 
             Debug.DrawLine(ray.origin, ray.origin + (ray.direction * 20.0f), new Color(1.0f, 1.0f, 1.0f));
 
-            if (Input.GetMouseButtonDown(0) && _hasFocus)
+            if (Input.GetMouseButtonDown(0)             && 
+                _hasFocus                               && 
+                _explosivesCount < _explosivesTotal)
             {
                 RaycastHit raycastHit;
 
-                if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity, 
+                if (Physics.Raycast(ray, out raycastHit, Mathf.Infinity,
                         _explodableLayerMask))
                 {
                     GameObject hitObject = raycastHit.transform.gameObject;
@@ -68,6 +70,8 @@ namespace Fluffy
                         crate.Explode();
                     }
                 }
+
+                _explosivesCount++;
             }
         }
 

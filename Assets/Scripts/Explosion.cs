@@ -24,6 +24,11 @@ namespace Fluffy
         }
 
         float _range;                                                   // Range of which objects to explode once explosion finishes
+
+        public int _totalExplosivesInScene = 0;
+
+        GUISystem _guiSystem;
+
         public float range
         {
             set
@@ -35,6 +40,9 @@ namespace Fluffy
         void Start()
         {
             _particleSystem = GetComponent<ParticleSystem>();
+            
+            _guiSystem = GameObject.Find("GUI System").GetComponent<GUISystem>();
+            _guiSystem.explosionCount += 1;
         }
 
         void Update()
@@ -43,6 +51,11 @@ namespace Fluffy
             {
                 DestroySelf();
             }
+        }
+
+        public void OnDestroy()
+        {
+            _guiSystem.explosionCount -= 1;
         }
 
         void DestroySelf()
@@ -54,7 +67,7 @@ namespace Fluffy
             {
                 GameObject gameObject = _effectedObjects[i];
 
-                if (gameObject.tag == "Sheep" && gameObject.active)
+                if (gameObject.tag == "Sheep" && gameObject.activeInHierarchy)
                 {
                     Sheep sheep = gameObject.GetComponent<Sheep>();
                     sheep.Explode();
