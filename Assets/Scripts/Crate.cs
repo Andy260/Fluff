@@ -27,8 +27,12 @@ namespace Fluffy
             GameObject explosionObject = Instantiate(_explosion, transform.position,
                 Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f))) as GameObject;
 
+            // Create explosion
             Explosion explosion = explosionObject.GetComponent<Explosion>();
-            explosion.sheep     = _sheep;
+            explosion.sheepToShow = _sheep;
+
+            // Unparent hidden sheep
+            _sheep.transform.SetParent(null);
 
             // Destroy this object
             Destroy(this.gameObject);

@@ -10,16 +10,16 @@ namespace Fluffy
 
         List<GameObject> _effectedObjects = new List<GameObject>();     // Which objects to explode once this explosion finishes
 
-        Sheep _sheep;                                                   // Which sheep to show once explosion has finished
+        Sheep _sheepToShow;                                             // Which sheep to show once explosion has finished
         /// <summary>
         /// Which sheep show the explosion set as
         /// active once finished
         /// </summary>
-        public Sheep sheep
+        public Sheep sheepToShow
         {
             set
             {
-                _sheep = value;
+                _sheepToShow = value;
             }
         }
 
@@ -54,7 +54,7 @@ namespace Fluffy
             {
                 GameObject gameObject = _effectedObjects[i];
 
-                if (gameObject.tag == "Sheep")
+                if (gameObject.tag == "Sheep" && gameObject.active)
                 {
                     Sheep sheep = gameObject.GetComponent<Sheep>();
                     sheep.Explode();
@@ -67,9 +67,9 @@ namespace Fluffy
             }
 
             // Show hidden sheep if any
-            if (_sheep != null)
+            if (_sheepToShow != null)
             {
-                _sheep.gameObject.SetActive(true);
+                _sheepToShow.gameObject.SetActive(true);
             }
 
             // Destroy this explosion
