@@ -43,6 +43,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _totalExplosivesInScene: 0
+  _effectLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!135 &13540666
 SphereCollider:
   m_ObjectHideFlags: 1
