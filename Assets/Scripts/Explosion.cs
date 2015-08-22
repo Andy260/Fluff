@@ -100,17 +100,7 @@ namespace Fluffy
 
                 if (distanceToSheep.magnitude <= _range)
                 {
-                    RaycastHit raycastHit;
-                    if (Physics.Raycast(transform.position, distanceToSheep.normalized, 
-                            out raycastHit, Mathf.Infinity, _effectLayerMask))
-                    {
-                        if (raycastHit.collider.tag != "Sheep")
-                        {
-                            continue;
-                        }
-
-                        _effectedObjects.Add(sheep[i]);
-                    }
+                    _effectedObjects.Add(sheep[i]);
                 }
             }
 
@@ -122,17 +112,7 @@ namespace Fluffy
 
                 if (distanceToCrate.magnitude <= _range)
                 {
-                    RaycastHit raycastHit;
-                    if (Physics.Raycast(transform.position, distanceToCrate.normalized,
-                            out raycastHit, Mathf.Infinity, _effectLayerMask))
-                    {
-                        if (raycastHit.collider.tag != "Crate")
-                        {
-                            continue;
-                        }
-
-                        _effectedObjects.Add(crates[i]);
-                    }
+                    _effectedObjects.Add(crates[i]);
                 }
             }
         }
