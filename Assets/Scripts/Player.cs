@@ -89,6 +89,7 @@ namespace Fluffy
 
                     crate.Explode();
                 }
+                _guiSystem.explosionCount += 1;
 
                 _explosivesCount++;
             }
@@ -117,9 +118,6 @@ namespace Fluffy
                 // Set range display range
                 RangeDisplay rangeDisplay = rangeDisplayObject.GetComponent<RangeDisplay>();
                 rangeDisplay._range = sheep.range;
-
-                // Set range display ignore object
-                rangeDisplay.ignoreObject = sheep.gameObject;
             }
         }
 

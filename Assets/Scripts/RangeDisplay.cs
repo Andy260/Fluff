@@ -17,16 +17,6 @@ namespace Fluffy
                 _range = value;
             }
         }
-        GameObject _ignoreObject;
-        public GameObject ignoreObject
-        {
-            set
-            {
-                _ignoreObject = value;
-            }
-        }
-
-        SphereCollider _sphereCollider;
 
         GameObject _model;
 
@@ -45,8 +35,6 @@ namespace Fluffy
 
         void Start()
         {
-            _sphereCollider = GetComponent<SphereCollider>();
-
             _model = transform.GetChild(0).gameObject;
             _model.transform.localRotation = Quaternion.Euler(new Vector3(90.0f, 0.0f, 0.0f));
         }
@@ -63,20 +51,7 @@ namespace Fluffy
                 _currentLifeTime += Time.deltaTime;
             }
 
-            _sphereCollider.radius = _range * 0.5f;
             _model.transform.localScale = new Vector3(scale, scale, scale);
-        }
-
-        public void OnTriggerEnter(Collider a_other)
-        {
-            if (a_other.tag != "Sheep" ||
-                a_other.gameObject == _ignoreObject)
-            {
-                return;
-            }
-
-            Sheep sheep = a_other.GetComponent<Sheep>();
-            sheep.Highlight(_lifeTime);
         }
     }
 }

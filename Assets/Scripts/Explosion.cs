@@ -27,6 +27,8 @@ namespace Fluffy
 
         public int _totalExplosivesInScene = 0;
 
+        public LayerMask _effectLayerMask;
+
         GUISystem _guiSystem;
 
         public float range
@@ -42,7 +44,6 @@ namespace Fluffy
             _particleSystem = GetComponent<ParticleSystem>();
             
             _guiSystem = GameObject.Find("GUI System").GetComponent<GUISystem>();
-            _guiSystem.explosionCount += 1;
         }
 
         void Update()
@@ -99,7 +100,17 @@ namespace Fluffy
 
                 if (distanceToSheep.magnitude <= _range)
                 {
-                    _effectedObjects.Add(sheep[i]);
+                    RaycastHit raycastHit;
+                    if (Physics.Raycast(transform.position, distanceToSheep.normalized, 
+                            out raycastHit, Mathf.Infinity, _effectLayerMask))
+                    {
+                        if (raycastHit.collider.tag != "Sheep")
+                        {
+                            continue;
+                        }
+
+                        _effectedObjects.Add(sheep[i]);
+                    }
                 }
             }
 
@@ -111,7 +122,17 @@ namespace Fluffy
 
                 if (distanceToCrate.magnitude <= _range)
                 {
-                    _effectedObjects.Add(crates[i]);
+                    RaycastHit raycastHit;
+                    if (Physics.Raycast(transform.position, distanceToCrate.normalized,
+                            out raycastHit, Mathf.Infinity, _effectLayerMask))
+                    {
+                        if (raycastHit.collider.tag != "Crate")
+                        {
+                            continue;
+                        }
+
+                        _effectedObjects.Add(crates[i]);
+                    }
                 }
             }
         }
