@@ -92,7 +92,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!81 &8135212
 AudioListener:
   m_ObjectHideFlags: 1
@@ -118,12 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dabb698e68fb5e4496323cc6712c362, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosivesTotal: 0
+  _explosivesTotal: 2
   _explodableLayerMask:
     serializedVersion: 2
     m_Bits: 256
   _explosivesCount: 0
-  _rangeDisplay: {fileID: 109972, guid: 59c552e217e30b847ae9aa6afa11c8e1, type: 2}
+  _rangeDisplay: {fileID: 181358, guid: 59c552e217e30b847ae9aa6afa11c8e1, type: 2}
 --- !u!124 &12454958
 Behaviour:
   m_ObjectHideFlags: 1

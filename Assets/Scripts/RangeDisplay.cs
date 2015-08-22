@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Fluffy
 {
@@ -16,6 +17,18 @@ namespace Fluffy
                 _range = value;
             }
         }
+        GameObject _ignoreObject;
+        public GameObject ignoreObject
+        {
+            set
+            {
+                _ignoreObject = value;
+            }
+        }
+
+        SphereCollider _sphereCollider;
+
+        GameObject _model;
 
         float scale
         {
@@ -32,7 +45,10 @@ namespace Fluffy
 
         void Start()
         {
-            transform.localRotation = Quaternion.Euler(new Vector3(90.0f, 0.0f, 0.0f));
+            _sphereCollider = GetComponent<SphereCollider>();
+
+            _model = transform.GetChild(0).gameObject;
+            _model.transform.localRotation = Quaternion.Euler(new Vector3(90.0f, 0.0f, 0.0f));
         }
 
         void Update()
@@ -47,7 +63,20 @@ namespace Fluffy
                 _currentLifeTime += Time.deltaTime;
             }
 
-            transform.localScale = new Vector3(scale, scale, scale);
+            _sphereCollider.radius = _range * 0.5f;
+            _model.transform.localScale = new Vector3(scale, scale, scale);
+        }
+
+        public void OnTriggerEnter(Collider a_other)
+        {
+            if (a_other.tag != "Sheep" ||
+                a_other.gameObject == _ignoreObject)
+            {
+                return;
+            }
+
+            Sheep sheep = a_other.GetComponent<Sheep>();
+            sheep.Highlight(_lifeTime);
         }
     }
 }
