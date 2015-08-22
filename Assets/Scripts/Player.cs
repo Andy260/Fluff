@@ -60,7 +60,7 @@ namespace Fluffy
             {
                 ExplodeObject(ray);
             }
-            else if (Input.GetMouseButton(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 ShowSheepRange(ray);
             }

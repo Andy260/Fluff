@@ -129,7 +129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fluffy
+  m_Text: Sheeplosion
 --- !u!222 &57636953
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -395,7 +395,6 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
-  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &440864778
 MonoBehaviour:
@@ -423,7 +422,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!224 &643319340 stripped
+--- !u!224 &643319340
 RectTransform:
   m_PrefabParentObject: {fileID: 22416878, guid: 91a7f679e39dc0f4f8b9409b7db336fb,
     type: 2}
@@ -554,7 +553,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91a7f679e39dc0f4f8b9409b7db336fb, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &1199780387 stripped
+--- !u!224 &1199780387
 RectTransform:
   m_PrefabParentObject: {fileID: 22416878, guid: 91a7f679e39dc0f4f8b9409b7db336fb,
     type: 2}
@@ -685,7 +684,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91a7f679e39dc0f4f8b9409b7db336fb, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &1275852948 stripped
+--- !u!224 &1275852948
 RectTransform:
   m_PrefabParentObject: {fileID: 22416878, guid: 91a7f679e39dc0f4f8b9409b7db336fb,
     type: 2}
@@ -762,7 +761,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
-  m_StereoMirrorMode: 0
 --- !u!4 &1366098760
 Transform:
   m_ObjectHideFlags: 0

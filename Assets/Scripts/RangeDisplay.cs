@@ -26,13 +26,13 @@ namespace Fluffy
                     return float.Epsilon;
                 }
 
-                return _range * (_currentLifeTime / _lifeTime);
+                return (_range * (_currentLifeTime / _lifeTime)) * 2.0f;
             }
         }
 
         void Start()
         {
-            
+            transform.localRotation = Quaternion.Euler(new Vector3(90.0f, 0.0f, 0.0f));
         }
 
         void Update()
@@ -47,7 +47,7 @@ namespace Fluffy
                 _currentLifeTime += Time.deltaTime;
             }
 
-            transform.localScale = new Vector3(scale, 0.0f, scale);
+            transform.localScale = new Vector3(scale, scale, scale);
         }
     }
 }
