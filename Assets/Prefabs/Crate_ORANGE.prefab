@@ -753,6 +753,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosion: {fileID: 169998, guid: 625d5ed4b0659034f88826cf8bff573b, type: 2}
+  _isNuclear: 0
 --- !u!114 &11443376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6d8409eba94ac459f5d5d9aad52176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 169998, guid: 625d5ed4b0659034f88826cf8bff573b, type: 2}
+  _explosion: {fileID: 142764, guid: 625d5ed4b0659034f88826cf8bff573b, type: 2}
 --- !u!135 &13587908
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -788,6 +789,10 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _explosion
+      value: 
+      objectReference: {fileID: 142764, guid: 625d5ed4b0659034f88826cf8bff573b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156088}
