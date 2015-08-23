@@ -98,9 +98,17 @@ namespace Fluffy
             {
                 Vector3 distanceToSheep = sheep[i].transform.position - transform.position;
 
+                // Check if object is within range
                 if (distanceToSheep.magnitude <= _range)
                 {
-                    _effectedObjects.Add(sheep[i]);
+                    RaycastHit raycastHit;
+
+                    // Check for object in the way of this object
+                    if (Physics.Raycast(transform.position, distanceToSheep.normalized, out raycastHit, 
+                            Mathf.Infinity, _effectLayerMask))
+                    {
+                        _effectedObjects.Add(sheep[i]);
+                    }
                 }
             }
 
@@ -110,9 +118,17 @@ namespace Fluffy
             {
                 Vector3 distanceToCrate = crates[i].transform.position - transform.position;
 
+                // Check if object is within range
                 if (distanceToCrate.magnitude <= _range)
                 {
-                    _effectedObjects.Add(crates[i]);
+                    RaycastHit raycastHit;
+
+                    // Check for object in the way of this object
+                    if (Physics.Raycast(transform.position, distanceToCrate.normalized, out raycastHit,
+                            Mathf.Infinity, _effectLayerMask))
+                    {
+                        _effectedObjects.Add(crates[i]);
+                    }
                 }
             }
         }

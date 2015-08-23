@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3348912}
   - 23: {fileID: 2381018}
   - 95: {fileID: 9597058}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rock_shard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3354860}
   - 23: {fileID: 2362588}
   - 95: {fileID: 9592124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 409598}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RocksGRP 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - 4: {fileID: 420858}
   - 33: {fileID: 3330110}
   - 23: {fileID: 2392506}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree_leaves_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - 4: {fileID: 420774}
   - 33: {fileID: 3340972}
   - 23: {fileID: 2358124}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: tree_leaves_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - 33: {fileID: 3361640}
   - 23: {fileID: 2398414}
   - 95: {fileID: 9581614}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rock_damaged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - 33: {fileID: 3305068}
   - 23: {fileID: 2369864}
   - 95: {fileID: 9525736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rock (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - 33: {fileID: 3393062}
   - 23: {fileID: 2360734}
   - 95: {fileID: 9559790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rock_damaged (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   - 33: {fileID: 3316088}
   - 23: {fileID: 2347514}
   - 95: {fileID: 9580362}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
