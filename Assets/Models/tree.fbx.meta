@@ -6,10 +6,16 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: tree_leaves_01
     400000: //RootNode
+    400002: tree_leaves_01
     2300000: //RootNode
+    2300002: tree_leaves_01
     3300000: //RootNode
+    3300002: tree_leaves_01
     4300000: tree_01
+    4300002: tree_main_01
+    4300004: tree_leaves_01
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -20,6 +26,10 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
