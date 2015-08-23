@@ -71,6 +71,8 @@ namespace Fluffy
         public void ShowSuccess()
         {
             _successWindow.SetActive(true);
+
+            Destroy(_playerCamController);
         }
 
         public void RestartLevel()

@@ -12,6 +12,16 @@ namespace Fluffy
 
         public GameObject _nukeParticleEffect;
         public GameObject _normalParticleEffect;
+        public GameObject _generatorParticleEffect;
+
+        bool _triggerByGenerator = false;
+        public bool triggerByGenerator
+        {
+            set
+            {
+                _triggerByGenerator = value;
+            }
+        }
 
         bool _triggeredByNuke = false;
         public bool triggerByNuke
@@ -88,6 +98,16 @@ namespace Fluffy
 
                 particleSystems = particleSystem.GetComponentsInChildren<ParticleSystem>();
             }
+            else if (_triggerByGenerator)
+            {
+                // Create particle system prefab
+                GameObject particleSystem =
+                    Instantiate(_generatorParticleEffect, transform.position, transform.rotation) as GameObject;
+
+                particleSystem.transform.SetParent(this.transform);
+
+                particleSystems = particleSystem.GetComponentsInChildren<ParticleSystem>();
+            }
             else
             {
                 // Create particle system prefab
@@ -114,7 +134,7 @@ namespace Fluffy
 
         void DestroySelf()
         {
-            if (!_triggeredByNuke)
+            if (!_triggeredByNuke || !_triggerByGenerator)
             {
                 CalculateAffectedObjects();
 
@@ -127,6 +147,11 @@ namespace Fluffy
                     {
                         Sheep sheep = gameObject.GetComponent<Sheep>();
                         sheep.Explode();
+                    }
+                    else if (gameObject.tag == "Generator")
+                    {
+                        Generator generator = gameObject.GetComponent<Generator>();
+                        generator.Explode();
                     }
                     else
                     {
@@ -143,7 +168,14 @@ namespace Fluffy
             }
             else
             {
-                _guiSystem.ShowFailure();
+                if (_triggerByGenerator)
+                {
+                    _guiSystem.ShowSuccess();
+                }
+                else
+                {
+                    _guiSystem.ShowFailure();
+                }
             }
 
             // Destroy this explosion
@@ -192,6 +224,27 @@ namespace Fluffy
                     //        Mathf.Infinity, _effectLayerMask))
                     //{
                     //    _effectedObjects.Add(crates[i]);
+                    //}
+                }
+            }
+
+            GameObject[] generators = GameObject.FindGameObjectsWithTag("Generator");
+            for (int i = 0; i < generators.Length; ++i)
+            {
+                Vector3 distanceToGenerator = generators[i].transform.position - transform.position;
+
+                // Check if object is within range
+                if (distanceToGenerator.magnitude <= _range)
+                {
+                    _effectedObjects.Add(generators[i]);
+
+                    //RaycastHit raycastHit;
+                    //
+                    //// Check for object in the way of this object
+                    //if (Physics.Raycast(transform.position, distanceToGenerator.normalized, out raycastHit,
+                    //        Mathf.Infinity, _effectLayerMask))
+                    //{
+                    //    _effectedObjects.Add(generators[i]);
                     //}
                 }
             }
