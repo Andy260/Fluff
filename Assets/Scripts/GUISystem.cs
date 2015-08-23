@@ -75,6 +75,16 @@ namespace Fluffy
             Destroy(_playerCamController);
         }
 
+        public void LoadNextLevel()
+        {
+            if (Application.loadedLevel + 1 > Application.levelCount)
+            {
+                return;
+            }
+
+            Application.LoadLevel(Application.loadedLevel + 1);
+        }
+
         public void RestartLevel()
         {
             Application.LoadLevel(Application.loadedLevel);
