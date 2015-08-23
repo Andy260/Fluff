@@ -10,6 +10,15 @@ namespace Fluffy
 
         List<GameObject> _effectedObjects = new List<GameObject>();     // Which objects to explode once this explosion finishes
 
+        bool _triggeredByNuke = false;
+        public bool triggerByNuke
+        {
+            set
+            {
+                _triggeredByNuke = value;
+            }
+        }
+
         Sheep _sheepToShow;                                             // Which sheep to show once explosion has finished
         /// <summary>
         /// Which sheep show the explosion set as
@@ -101,14 +110,16 @@ namespace Fluffy
                 // Check if object is within range
                 if (distanceToSheep.magnitude <= _range)
                 {
-                    RaycastHit raycastHit;
+                    _effectedObjects.Add(sheep[i]);
 
-                    // Check for object in the way of this object
-                    if (Physics.Raycast(transform.position, distanceToSheep.normalized, out raycastHit, 
-                            Mathf.Infinity, _effectLayerMask))
-                    {
-                        _effectedObjects.Add(sheep[i]);
-                    }
+                    //RaycastHit raycastHit;
+                    //
+                    //// Check for object in the way of this object
+                    //if (Physics.Raycast(transform.position, distanceToSheep.normalized, out raycastHit, 
+                    //        Mathf.Infinity, _effectLayerMask))
+                    //{
+                    //    _effectedObjects.Add(sheep[i]);
+                    //}
                 }
             }
 
@@ -121,14 +132,16 @@ namespace Fluffy
                 // Check if object is within range
                 if (distanceToCrate.magnitude <= _range)
                 {
-                    RaycastHit raycastHit;
+                    _effectedObjects.Add(crates[i]);
 
-                    // Check for object in the way of this object
-                    if (Physics.Raycast(transform.position, distanceToCrate.normalized, out raycastHit,
-                            Mathf.Infinity, _effectLayerMask))
-                    {
-                        _effectedObjects.Add(crates[i]);
-                    }
+                    //RaycastHit raycastHit;
+                    //
+                    //// Check for object in the way of this object
+                    //if (Physics.Raycast(transform.position, distanceToCrate.normalized, out raycastHit,
+                    //        Mathf.Infinity, _effectLayerMask))
+                    //{
+                    //    _effectedObjects.Add(crates[i]);
+                    //}
                 }
             }
         }
