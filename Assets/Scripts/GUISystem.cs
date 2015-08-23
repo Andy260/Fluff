@@ -9,6 +9,7 @@ namespace Fluffy
         GameObject _successWindow;
 
         Player _player;
+        CameraController _playerCamController;
 
         bool _levelEnded = false;
         public bool levelEnded
@@ -39,23 +40,37 @@ namespace Fluffy
             _successWindow = transform.FindChild("Success Window").gameObject;
 
             _player = GameObject.Find("Player").GetComponent<Player>();
+            _playerCamController = _player.GetComponent<CameraController>();
         }
 
         void Update()
         {
-            if (_explosionCount > 0)
+            if (_playerCamController == null)
             {
+                // Player has failed
                 return;
             }
 
             if (_player.sheepCount <= 0)
             {
-                _successWindow.SetActive(true);
+                ShowSuccess();
             }
             else if (_player._explosivesCount >= _player._explosivesTotal)
             {
-                _failureWindow.SetActive(true);
+                ShowFailure();
             }
+        }
+
+        public void ShowFailure()
+        {
+            _failureWindow.SetActive(true);
+
+            Destroy(_playerCamController);
+        }
+
+        public void ShowSuccess()
+        {
+            _successWindow.SetActive(true);
         }
 
         public void RestartLevel()

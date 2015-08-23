@@ -6,9 +6,12 @@ namespace Fluffy
 {
     public class Explosion : MonoBehaviour
     {
-        ParticleSystem _particleSystem;                                 // Particle system of explosion
-
         List<GameObject> _effectedObjects = new List<GameObject>();     // Which objects to explode once this explosion finishes
+
+        List<ParticleSystem> _particleSystems;
+
+        public GameObject _nukeParticleEffect;
+        public GameObject _normalParticleEffect;
 
         bool _triggeredByNuke = false;
         public bool triggerByNuke
@@ -34,8 +37,6 @@ namespace Fluffy
 
         float _range;                                                   // Range of which objects to explode once explosion finishes
 
-        public int _totalExplosivesInScene = 0;
-
         public LayerMask _effectLayerMask;
 
         GUISystem _guiSystem;
@@ -50,16 +51,59 @@ namespace Fluffy
 
         void Start()
         {
-            _particleSystem = GetComponent<ParticleSystem>();
-            
             _guiSystem = GameObject.Find("GUI System").GetComponent<GUISystem>();
         }
 
         void Update()
         {
-            if (_particleSystem.particleCount == 0)
+            if (_particleSystems == null)
             {
-                DestroySelf();
+                LoadParticleSystem();
+                return;
+            }
+
+            for (int i = 0; i < _particleSystems.Count; ++i)
+            {
+                if (_particleSystems[i].particleCount > 0)
+                {
+                    // Continue animating particle effect
+                    return;
+                }
+            }
+
+            DestroySelf();
+        }
+
+        void LoadParticleSystem()
+        {
+            ParticleSystem[] particleSystems;
+
+            if (_triggeredByNuke)
+            {
+                // Create particle system prefab
+                GameObject particleSystem =
+                    Instantiate(_nukeParticleEffect, transform.position, transform.rotation) as GameObject;
+
+                particleSystem.transform.SetParent(this.transform);
+
+                particleSystems = particleSystem.GetComponentsInChildren<ParticleSystem>();
+            }
+            else
+            {
+                // Create particle system prefab
+                GameObject particleSystem = 
+                    Instantiate(_normalParticleEffect, transform.position, transform.rotation) as GameObject;
+
+                particleSystem.transform.SetParent(this.transform);
+
+                particleSystems = particleSystem.GetComponentsInChildren<ParticleSystem>();
+            }
+
+            _particleSystems = new List<ParticleSystem>(particleSystems.Length);
+
+            for (int i = 0; i < particleSystems.Length; ++i)
+            {
+                _particleSystems.Add(particleSystems[i]);
             }
         }
 
@@ -70,29 +114,36 @@ namespace Fluffy
 
         void DestroySelf()
         {
-            CalculateAffectedObjects();
-
-            // Explode all sheep within range
-            for (int i = 0; i < _effectedObjects.Count; ++i)
+            if (!_triggeredByNuke)
             {
-                GameObject gameObject = _effectedObjects[i];
+                CalculateAffectedObjects();
 
-                if (gameObject.tag == "Sheep" && gameObject.activeInHierarchy)
+                // Explode all sheep within range
+                for (int i = 0; i < _effectedObjects.Count; ++i)
                 {
-                    Sheep sheep = gameObject.GetComponent<Sheep>();
-                    sheep.Explode();
+                    GameObject gameObject = _effectedObjects[i];
+
+                    if (gameObject.tag == "Sheep" && gameObject.activeInHierarchy)
+                    {
+                        Sheep sheep = gameObject.GetComponent<Sheep>();
+                        sheep.Explode();
+                    }
+                    else
+                    {
+                        Crate crate = gameObject.GetComponent<Crate>();
+                        crate.Explode();
+                    }
                 }
-                else
+
+                // Show hidden sheep if any
+                if (_sheepToShow != null)
                 {
-                    Crate crate = gameObject.GetComponent<Crate>();
-                    crate.Explode();
+                    _sheepToShow.gameObject.SetActive(true);
                 }
             }
-
-            // Show hidden sheep if any
-            if (_sheepToShow != null)
+            else
             {
-                _sheepToShow.gameObject.SetActive(true);
+                _guiSystem.ShowFailure();
             }
 
             // Destroy this explosion

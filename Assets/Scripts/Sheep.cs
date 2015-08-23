@@ -9,6 +9,9 @@ namespace Fluffy
         [Tooltip("Explosion prefab")]
         public GameObject _explosion;
 
+        [Tooltip("Should this sheep be treated as a game ending sheep?")]
+        public bool _isNuclear = false;
+
         float _range;
         public float range
         {
@@ -49,7 +52,12 @@ namespace Fluffy
                 Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f))) as GameObject;
 
             Explosion explosion = explosionObject.GetComponent<Explosion>();
-            explosion.range = _range;
+            explosion.range     = _range;
+
+            if (_isNuclear)
+            {
+                explosion.triggerByNuke = true;
+            }
 
             // Destroy this object
             Destroy(this.gameObject);
