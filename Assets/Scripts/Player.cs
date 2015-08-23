@@ -81,17 +81,11 @@ namespace Fluffy
                     Sheep sheep = hitObject.GetComponent<Sheep>();
 
                     sheep.Explode();
-                }
-                else
-                {
-                    // Crate
-                    Crate crate = hitObject.GetComponent<Crate>();
 
-                    crate.Explode();
-                }
-                _guiSystem.explosionCount += 1;
+                    _guiSystem.explosionCount += 1;
 
-                _explosivesCount++;
+                    _explosivesCount++;
+                }
             }
         }
 
