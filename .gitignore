@@ -19,3 +19,12 @@
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
+# Visual Studio 2013 Unity tools - ignores
+Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll
+Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
+
+# Ignore assets
+*.fbx
+*.png
+*.tga
