@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5ae64a06defd6f54b841bf6620c8ae71
-timeCreated: 1441176392
+guid: 9d92ff713849fc2438de6c41249ea8ec
+timeCreated: 1440214892
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -13,8 +13,9 @@ ModelImporter:
     2300002: tree_leaves_01
     3300000: //RootNode
     3300002: tree_leaves_01
-    4300000: tree_main_01
-    4300002: tree_leaves_01
+    4300000: tree_01
+    4300002: tree_main_01
+    4300004: tree_leaves_01
     9500000: //RootNode
   materials:
     importMaterials: 1

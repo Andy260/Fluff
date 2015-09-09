@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 55738d87f597b384db4c109750047330
-timeCreated: 1441176392
+guid: 52c79f43e2ed268459721468d285db1a
+timeCreated: 1440214892
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -20,10 +20,6 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationImportErrors: 
-    animationImportWarnings: 
-    animationRetargetingWarnings: 
-    animationDoRetargetingWarnings: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
