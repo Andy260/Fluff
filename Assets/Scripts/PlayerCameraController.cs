@@ -15,8 +15,6 @@ namespace Sheeplosion
         KeyCode _moveLeftKey        = KeyCode.A;
         [SerializeField]
         KeyCode _moveRightKey       = KeyCode.D;
-
-        [Space(10)]
 #endif
         [Header("Movement Limits")]
         [SerializeField]
@@ -29,18 +27,21 @@ namespace Sheeplosion
         [SerializeField]
         float _minZoomDistance      = 1.0f;
 
+#if UNITY_EDITOR
+        [Header("Editor Only")]
+        [SerializeField]
+        bool _simulateTouch = false;
+#endif
+
         Transform _moveTransform;
         Transform _zoomTransform;
+        Vector3 _lastMousePos;
 
         public void Awake()
         {
             // Get relevant transforms for movement and zooming
             _zoomTransform = transform;
             _moveTransform = transform.parent.parent;
-
-#if UNITY_EDITOR && !UNITY_STANDALONE
-            Input.simulateMouseWithTouches = true;
-#endif
         }
 
         void Start()
@@ -71,7 +72,7 @@ namespace Sheeplosion
             {
                 transformDirection.x += 1.0f;
             }
-
+            
             // Prevent diagonal movement from moving camera faster than
             // non-diagonal movement
             if (transformDirection.x != 0.0f && transformDirection.z != 0.0f)
@@ -80,21 +81,39 @@ namespace Sheeplosion
                 transformDirection.z *= 0.5f;
             }
 
-            // Camera zoom
-            zoomAmount = Input.mouseScrollDelta.y;
-#else
-            Touch[] touches = Input.touches;
-
-            // Camera translation
-            if (touches.Length == 1)
+    #if UNITY_EDITOR
+            if (_simulateTouch)
             {
-                Touch touch = touches[0];
+                // Simulate touch with mouse input
+                if (Input.GetMouseButton(0))
+                {
+                    Vector3 mousePosition = new Vector3(Input.mousePosition.x, 0.0f, Input.mousePosition.y);
+
+                    transformDirection = mousePosition - _lastMousePos;
+                    transformDirection *= -1.0f;
+                }
+
+                _lastMousePos = new Vector3(Input.mousePosition.x, 0.0f, Input.mousePosition.y);
+
+                // Camera zoom
+                zoomAmount = Input.mouseScrollDelta.y;
+            }
+    #endif
+
+#else
+            // Camera translation
+            if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
                 transformDirection = touch.deltaPosition;
             }
             // Camera zoom
-            else if (touches.Length == 2)
+            else if (Input.touchCount == 2)
             {
-                
+                Touch firstTouch    = Input.GetTouch(0);
+                Touch secondTouch   = Input.GetTouch(1);
+
+                // TODO: Camera zoom - touch input
             }
 #endif
             TransformCamera(transformDirection);
