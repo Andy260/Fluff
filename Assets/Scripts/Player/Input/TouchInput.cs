@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace Sheeplosion
 {
+    [RequireComponent(typeof(Player))]
     public class TouchInput : MonoBehaviour
     {
 #if UNITY_EDITOR
@@ -89,8 +90,8 @@ namespace Sheeplosion
         void HandleExplodeTriggers()
         {
 #if UNITY_EDITOR
-            // TODO: Fix bug where simulated touch gesture
-            // triggers when drag gesture occurs
+            // TODO: Fix bug where single touch gesture
+            // triggers explosion at the end of drag gestures
 
             if (Input.GetMouseButtonUp(0) &&
                 mouseDelta == Vector3.zero)

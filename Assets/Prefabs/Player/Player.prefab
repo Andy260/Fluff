@@ -8,9 +8,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442198}
-  - 114: {fileID: 11420336}
-  - 114: {fileID: 11407638}
-  m_Layer: 2
+  - 114: {fileID: 11455360}
+  - 114: {fileID: 11472722}
+  - 114: {fileID: 11455568}
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -29,7 +30,7 @@ GameObject:
   - 92: {fileID: 9236848}
   - 124: {fileID: 12426076}
   - 81: {fileID: 8150138}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -44,7 +45,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459470}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Rotation Node
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,6 +118,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -136,7 +138,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120928}
   m_Enabled: 1
---- !u!114 &11407638
+--- !u!114 &11455360
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,32 +146,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 120498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23fed4b72df18584abeaed3511336a7c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ab913454589c324aa66eb825ad20c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveUp: 119
-  _moveDown: 115
-  _moveLeft: 97
-  _moveRight: 100
-  _speed: 20
-  _maxZoomDistance: 0
---- !u!114 &11420336
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dabb698e68fb5e4496323cc6712c362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _explosivesTotal: 2
-  _explodableLayerMask:
+  _explosionsAmount: 2
+  _explodableLayers:
     serializedVersion: 2
     m_Bits: 256
-  _explosivesCount: 0
-  _rangeDisplay: {fileID: 171434, guid: 59c552e217e30b847ae9aa6afa11c8e1, type: 2}
+--- !u!114 &11455568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120498}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7173358bf77bf654d8ab3820c5cbafc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 10
+--- !u!114 &11472722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ac727d2f1d7424cb0407a8f02734df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!124 &12426076
 Behaviour:
   m_ObjectHideFlags: 1

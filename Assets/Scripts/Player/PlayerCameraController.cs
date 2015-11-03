@@ -28,8 +28,20 @@ namespace Sheeplosion
             }
         }
 
+        void Update()
+        {
+
+        }
+
         public void TranslateCamera(Vector3 a_translation)
         {
+            if (!enabled)
+            {
+                // Ignore function calls, if this script
+                // is disabled
+                return;
+            }
+
             // Ensure no translation on the Y axis happens
             // for lateral movement
             if (a_translation.y > 0)
