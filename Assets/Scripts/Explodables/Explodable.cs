@@ -139,7 +139,7 @@ namespace Sheeplosion
         GameObject InstantiatePrefab(GameObject a_prefab)
         {
             // Create prefab
-            GameObject instantiatedObject = Instantiate(_explosionPrefab, _transform.position,
+            GameObject instantiatedObject = Instantiate(a_prefab, _transform.position,
                 _transform.rotation) as GameObject;
 
             // Hide object
@@ -329,11 +329,11 @@ namespace Sheeplosion
             _modelReference.SetActive(false);
 
             // Display crater if available
-            if (_craterPrefab != null)
+            if (_craterObject != null)
             {
-                _craterPrefab.SetActive(true);
+                _craterObject.SetActive(true);
             }
-
+            
             // Disable particle effect at end of particle effect
             Invoke("DisableExplosionEffect", _particleSystemLifeTime);
 

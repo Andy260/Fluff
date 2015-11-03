@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401612}
   m_Layer: 0
-  m_Name: Crater - Nuclear Varient
+  m_Name: Crater - Varient Nuclear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
