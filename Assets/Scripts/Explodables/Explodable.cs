@@ -34,9 +34,13 @@ namespace Sheeplosion
         [SerializeField]
         bool _explodableByPlayer = true;
 
-        [Tooltip("The range at which this object will trigger other objects to explode")]
+        [Tooltip("Objects closer than this range, will not be triggered within chain reactions")]
         [SerializeField]
-        float _chainReactionRange = 10.0f;
+        float _chainReactionMinRange = 0.0f;
+
+        [Tooltip("Objects further than this range, will not be triggered within chain reactions")]
+        [SerializeField]
+        float _chainReactionMaxRange = 10.0f;
 
         [Tooltip("Time at which chain reactions will trigger. (A value of 0 will wait until particle effect has finished before triggering chains, and sending events)")]
         [SerializeField]
@@ -70,6 +74,17 @@ namespace Sheeplosion
             // Cache game object attributes
             _transform  = transform;
             _gameObject = gameObject;
+
+            // Ensure configuration settings are reasonable
+            if (_chainReactionMinRange > _chainReactionMaxRange ||
+                _chainReactionMaxRange <= 0.0f)
+            {
+                if (_type == ExplodableType.Sheep)
+                {
+                    Debug.LogWarning(string.Format("Explodable may not be able to trigger chain reactions ({0})", 
+                        this.name));
+                }
+            }
 
             // Ensure explosion particle effect is not null
             if (_explosionPrefab == null)
@@ -130,6 +145,7 @@ namespace Sheeplosion
             // Hide object
             instantiatedObject.SetActive(false);
 
+#if UNITY_EDITOR
             // Set object's parent
             if (a_prefab == _explosionPrefab)
             {
@@ -224,6 +240,7 @@ namespace Sheeplosion
                 instantiatedObject.transform.SetParent(sheepFolder.transform);
                 instantiatedObject.name = string.Format(a_prefab.name);
             }
+#endif
 
             return instantiatedObject;
         }
@@ -264,18 +281,21 @@ namespace Sheeplosion
 
         public void OnDrawGizmosSelected()
         {
+            Gizmos.color    = Color.red;
+            Gizmos.matrix   = transform.localToWorldMatrix;
+
             if (_type == ExplodableType.Sheep)
             {
                 // Render chain reaction range gizmo
-                Gizmos.DrawWireSphere(transform.position, _chainReactionRange);
+                Gizmos.DrawWireSphere(Vector3.zero, _chainReactionMaxRange);
             }
             else if (_type == ExplodableType.Crate)
             {
                 // Render chain reaction range gizmo for hidden sheep
                 if (_hiddenSheepPrefab != null)
                 {
-                    float range = _hiddenSheepPrefab.GetComponent<Explodable>()._chainReactionRange;
-                    Gizmos.DrawWireSphere(transform.position, range);
+                    float range = _hiddenSheepPrefab.GetComponent<Explodable>()._chainReactionMaxRange;
+                    Gizmos.DrawWireSphere(Vector3.zero, range);
                 }
             }
         }
@@ -416,7 +436,8 @@ namespace Sheeplosion
                 Transform transform = explodable.transform;
                 float distanceSqr   = (_transform.position - transform.position).sqrMagnitude;
 
-                if (distanceSqr < Mathf.Pow(_chainReactionRange, 2.0f))
+                if (distanceSqr < Mathf.Pow(_chainReactionMaxRange, 2.0f) &&
+                    distanceSqr > Mathf.Pow(_chainReactionMinRange, 2.0f))
                 {
                     // Attempt to explode object within range
                     bool chainReactionStatus = explodable.Explode("Explosion");
