@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 415226}
   - 65: {fileID: 6519532}
+  - 114: {fileID: 11471658}
   m_Layer: 8
   m_Name: Generator
   m_TagString: Generator
@@ -138,7 +139,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.1500001, y: 0, z: 10.3100004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 492726}
@@ -424,6 +425,25 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11471658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1db9f3cd3fcb6d149a9f12910e3c9fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionPrefab: {fileID: 183628, guid: 31fae277385c57d468d0f2bd69c57640, type: 2}
+  _craterPrefab: {fileID: 119290, guid: 108fb583c8b39ce48a35092754870cba, type: 2}
+  _hiddenSheepPrefab: {fileID: 0}
+  _modelReference: {fileID: 143594}
+  _type: 3
+  _explodableByPlayer: 0
+  _chainReactionRange: 0
+  _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

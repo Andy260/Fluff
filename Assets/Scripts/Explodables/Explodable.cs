@@ -16,14 +16,14 @@ namespace Sheeplosion
         [Header("Prefabs")]
         [SerializeField]
         GameObject _explosionPrefab;
+        [SerializeField]
+        GameObject _craterPrefab;
+        [SerializeField]
+        GameObject _hiddenSheepPrefab;
 
         [Header("References")]
         [SerializeField]
         GameObject _modelReference;
-        [SerializeField]
-        GameObject _craterReference;
-        [SerializeField]
-        GameObject _hiddenSheep;
 
         [Header("Configuration")]
         [Tooltip("Sheep: Chains explosions (generic type) \nCrate: Disables parented sheep upon scene start, then enables it once exploded \nNuclear Sheep: Fails the player with nuclear sheep endgame effect \nGenerator: Player succeeds")]
@@ -45,8 +45,10 @@ namespace Sheeplosion
         // Precalulated particle System lifetime
         float _particleSystemLifeTime = 0.0f;
         
-        // Explosion Object
+        // Instantiated prefabs
         GameObject _explosionObject;
+        GameObject _craterObject;
+        GameObject _hiddenSheepObject;
         
         // Scene manager reference within scene
         SceneManager _sceneManager;
@@ -76,30 +78,18 @@ namespace Sheeplosion
             }
             else
             {
-                // Create explosion particle effect object
-                GameObject explosionObject = Instantiate(_explosionPrefab, _transform.position,
-                    _transform.rotation) as GameObject;
-
-                // Set this object as explosion object's parent
-                explosionObject.transform.SetParent(_transform);
-                // Hide object
-                explosionObject.SetActive(false);
-                // Correctly name object
-                explosionObject.name = "Explosion (Particle Effect)";
-
-                // Save reference to object
-                _explosionObject = explosionObject;
+                _explosionObject = InstantiatePrefab(_explosionPrefab);
             }
 
             // Ensure crater prefab is not null
-            if (_craterReference == null &&
+            if (_craterPrefab == null &&
                 _type != ExplodableType.Crate)
             {
                 Debug.LogWarning("Crater reference not set for: " + this.name);
             }
-            else if (_craterReference != null)
+            else if (_craterPrefab != null)
             {
-                _craterReference.SetActive(false);
+                _craterObject = InstantiatePrefab(_craterPrefab);
             }
 
             // Ensure model reference is not null
@@ -108,16 +98,16 @@ namespace Sheeplosion
                 Debug.LogWarning("Model reference not set for: " + this.name);
             }
 
-            // Ensure hidden sheep reference is not null
+            // Ensure hidden sheep prefab is not null
             // if this explodable object is a crate
-            if (_hiddenSheep == null &&
+            if (_hiddenSheepPrefab == null &&
                 _type == ExplodableType.Crate)
             {
                 Debug.LogWarning("Hidden Sheep reference not set for: " + this.name);
             }
             else if (_type == ExplodableType.Crate)
             {
-                _hiddenSheep.SetActive(false);
+                _hiddenSheepObject = InstantiatePrefab(_hiddenSheepPrefab);
             }
 
             // Calculate particle system lifetime
@@ -129,6 +119,113 @@ namespace Sheeplosion
             {
                 Debug.LogWarning("Unable to find scene manager within scene");
             }
+        }
+
+        GameObject InstantiatePrefab(GameObject a_prefab)
+        {
+            // Create prefab
+            GameObject instantiatedObject = Instantiate(_explosionPrefab, _transform.position,
+                _transform.rotation) as GameObject;
+
+            // Hide object
+            instantiatedObject.SetActive(false);
+
+            // Set object's parent
+            if (a_prefab == _explosionPrefab)
+            {
+                // Find Particle Effects folder object
+                GameObject particleEffectsFolder = GameObject.Find("Particle Effects");
+
+                if (particleEffectsFolder == null)
+                {
+                    // Create object if not found
+                    particleEffectsFolder       = new GameObject();
+                    particleEffectsFolder.name  = "Particle Effects";
+
+                    Debug.LogWarning("Unable to find 'Particle Effects' folder object, creating...");
+                }
+
+                // Find explosions folder object
+                Transform explosionsFolder = particleEffectsFolder.transform.FindChild("Explosions");
+
+                if (explosionsFolder == null)
+                {
+                    // Create object if not found
+                    explosionsFolder        = new GameObject().transform;
+                    explosionsFolder.name   = "Explosions";
+                    explosionsFolder.transform.SetParent(particleEffectsFolder.transform);
+
+                    Debug.LogWarning("Unable to find 'Explosions' folder object, creating...");
+                }
+
+                // Parent and name instantiated object
+                instantiatedObject.transform.SetParent(explosionsFolder.transform);
+                instantiatedObject.name = string.Format("Explosion ({0})", this.name);
+            }
+            else if (a_prefab == _craterPrefab)
+            {
+                // Find Environment folder object
+                GameObject environmentFolder = GameObject.Find("Environment");
+
+                if (environmentFolder == null)
+                {
+                    // Create object if not found
+                    environmentFolder       = new GameObject();
+                    environmentFolder.name  = "Environment";
+
+                    Debug.LogWarning("Unable to find 'Environment' folder object, creating...");
+                }
+
+                // Find craters folder object
+                Transform craterFolder = environmentFolder.transform.FindChild("Craters");
+
+                if (craterFolder == null)
+                {
+                    // Create object if not found
+                    craterFolder        = new GameObject().transform;
+                    craterFolder.name   = "Craters";
+                    craterFolder.transform.SetParent(environmentFolder.transform);
+
+                    Debug.LogWarning("Unable to find 'Craters' folder object, creating...");
+                }
+
+                // Parent and name instantiated object
+                instantiatedObject.transform.SetParent(craterFolder.transform);
+                instantiatedObject.name = string.Format("Crater ({0})", this.name);
+            }
+            else if (a_prefab == _hiddenSheepObject)
+            {
+                // Find Explodables folder object
+                GameObject explodablesFolder = GameObject.Find("Explodables");
+
+                if (explodablesFolder == null)
+                {
+                    // Create object if not found
+                    explodablesFolder       = new GameObject();
+                    explodablesFolder.name  = "Explodables";
+
+                    Debug.LogWarning("Unable to find 'Explodables' folder object, creating...");
+                }
+
+                // Find sheep folder object
+                Transform sheepFolder = explodablesFolder.transform.FindChild("Sheep");
+
+                if (sheepFolder == null)
+                {
+                    // Create object if not found
+                    sheepFolder         = new GameObject().transform;
+                    sheepFolder.name    = "Sheep";
+                    sheepFolder.transform.SetParent(explodablesFolder.transform);
+
+                    Debug.LogWarning("Unable to find 'Sheep' folder object, creating...");
+                }
+
+                // Parent and name instantiated object
+                instantiatedObject.transform.SetParent(sheepFolder.transform);
+                instantiatedObject.name = string.Format(a_prefab.name);
+            }
+
+            return instantiatedObject;
         }
 
         float CalculateParticleSystemLifeTime()
@@ -167,8 +264,20 @@ namespace Sheeplosion
 
         public void OnDrawGizmosSelected()
         {
-            // Render chain reaction range gizmo
-            Gizmos.DrawWireSphere(transform.position, _chainReactionRange);
+            if (_type == ExplodableType.Sheep)
+            {
+                // Render chain reaction range gizmo
+                Gizmos.DrawWireSphere(transform.position, _chainReactionRange);
+            }
+            else if (_type == ExplodableType.Crate)
+            {
+                // Render chain reaction range gizmo for hidden sheep
+                if (_hiddenSheepPrefab != null)
+                {
+                    float range = _hiddenSheepPrefab.GetComponent<Explodable>()._chainReactionRange;
+                    Gizmos.DrawWireSphere(transform.position, range);
+                }
+            }
         }
 
         /// <summary>
@@ -195,15 +304,14 @@ namespace Sheeplosion
 
             // Display particle effect
             _explosionObject.SetActive(true);
-            _explosionObject.transform.SetParent(null);
 
             // Hide this object's model
             _modelReference.SetActive(false);
 
             // Display crater if available
-            if (_craterReference != null)
+            if (_craterPrefab != null)
             {
-                _craterReference.SetActive(true);
+                _craterPrefab.SetActive(true);
             }
 
             // Disable particle effect at end of particle effect
@@ -253,16 +361,23 @@ namespace Sheeplosion
             // TODO: Alert Scene manager of sheep being destroyed
 
             TriggerChainReactions();
+
+            _gameObject.SetActive(false);
         }
 
         void CrateExplosion()
         {
-            // Show hidden sheep
-            _hiddenSheep.SetActive(true);
+            if (_hiddenSheepObject != null)
+            {
+                // Show hidden sheep
+                _hiddenSheepObject.SetActive(true);
 
-            // Unparent hidden sheep, so it remains active
-            // when this object gets deactivated
-            _hiddenSheep.transform.SetParent(null);
+                // Unparent hidden sheep, so it remains active
+                // when this object gets deactivated
+                _hiddenSheepObject.transform.SetParent(null);
+            }
+
+            _gameObject.SetActive(false);
         }
 
         void NuclearSheepExplosion()
@@ -271,6 +386,8 @@ namespace Sheeplosion
             // explode all explodables, and send failure message
 
             Debug.Log("Player triggered Nuclear explosion");
+
+            _gameObject.SetActive(false);
         }
 
         void GeneratorExplosion()
@@ -278,6 +395,8 @@ namespace Sheeplosion
             // TODO: Send PlayerWin message
 
             Debug.Log("Player exploded generator");
+
+            _gameObject.SetActive(false);
         }
 
         void TriggerChainReactions()
@@ -313,8 +432,6 @@ namespace Sheeplosion
                     }
                 }
             }
-
-            _gameObject.SetActive(false);
         }
     }
 }
