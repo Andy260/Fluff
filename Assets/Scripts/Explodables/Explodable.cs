@@ -47,20 +47,19 @@ namespace Sheeplosion
         
         // Explosion Object
         GameObject _explosionObject;
-
-        // Trigger used to determine which objects
-        // can be exploded within a chain reaction
-        SphereCollider _sphereTrigger;
+        
+        // Scene manager reference within scene
+        SceneManager _sceneManager;
 
         // Cached GameObject properties
         Transform _transform;
         GameObject _gameObject;
 
-        public bool exploded
+        public ExplodableType type
         {
             get
             {
-                return _gameObject.activeInHierarchy;
+                return _type;
             }
         }
 
@@ -93,11 +92,12 @@ namespace Sheeplosion
             }
 
             // Ensure crater prefab is not null
-            if (_craterReference == null)
+            if (_craterReference == null &&
+                _type != ExplodableType.Crate)
             {
                 Debug.LogWarning("Crater reference not set for: " + this.name);
             }
-            else
+            else if (_craterReference != null)
             {
                 _craterReference.SetActive(false);
             }
@@ -122,6 +122,13 @@ namespace Sheeplosion
 
             // Calculate particle system lifetime
             _particleSystemLifeTime = CalculateParticleSystemLifeTime();
+
+            // Save reference to scene manager
+            _sceneManager = FindObjectOfType<SceneManager>();
+            if (_sceneManager == null)
+            {
+                Debug.LogWarning("Unable to find scene manager within scene");
+            }
         }
 
         float CalculateParticleSystemLifeTime()
@@ -180,38 +187,51 @@ namespace Sheeplosion
                 return false;
             }
 
+            // Ensure this gameobject is active
+            if (!_gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+
             // Display particle effect
             _explosionObject.SetActive(true);
+            _explosionObject.transform.SetParent(null);
 
             // Hide this object's model
             _modelReference.SetActive(false);
 
-            // Disable particle effect at end of particle effect
-            float particleDisableTime = _explosionTime;
-            if (_explosionTime <= 0.0f)
+            // Display crater if available
+            if (_craterReference != null)
             {
-                particleDisableTime = _particleSystemLifeTime;
+                _craterReference.SetActive(true);
             }
 
-            Invoke("ChainExplosions", particleDisableTime);
+            // Disable particle effect at end of particle effect
+            Invoke("DisableExplosionEffect", _particleSystemLifeTime);
+
+            float chainReactionTime = _particleSystemLifeTime;
+            if (_explosionTime > 0)
+            {
+                chainReactionTime = _explosionTime;
+            }
 
             // Handle type specific functionality
             switch (_type)
             {
                 case ExplodableType.Sheep:
-                    SheepExplosion();
+                    Invoke("SheepExplosion", chainReactionTime);
                     break;
 
                 case ExplodableType.Crate:
-                    CrateExplosion();
+                    Invoke("CrateExplosion", chainReactionTime);
                     break;
 
                 case ExplodableType.NuclearSheep:
-                    NuclearSheepExplosion();
+                    Invoke("NuclearSheepExplosion", chainReactionTime);
                     break;
 
                 case ExplodableType.Generator:
-                    GeneratorExplosion();
+                    Invoke("GeneratorExplosion", chainReactionTime);
                     break;
             }
             
@@ -219,34 +239,82 @@ namespace Sheeplosion
         }
 
         /// <summary>
-        /// Disables the explosion particle effect, then attempts to chain explosions
+        /// Disables the explosion particle effect through an Invoke method call
         /// </summary>
-        void ChainExplosions()
+        void DisableExplosionEffect()
         {
             _explosionObject.SetActive(false);
 
-            // TODO: Chain explosions
+            Debug.Log("Disabling explosion particle effect for: " + this.name);
         }
 
         void SheepExplosion()
         {
             // TODO: Alert Scene manager of sheep being destroyed
+
+            TriggerChainReactions();
         }
 
         void CrateExplosion()
         {
-            // TODO: Show hidden sheep once particle effect has ended
+            // Show hidden sheep
+            _hiddenSheep.SetActive(true);
+
+            // Unparent hidden sheep, so it remains active
+            // when this object gets deactivated
+            _hiddenSheep.transform.SetParent(null);
         }
 
         void NuclearSheepExplosion()
         {
             // TODO: Play nuclear sheep loss effect
-            // and send PlayerLoss message
+            // explode all explodables, and send failure message
+
+            Debug.Log("Player triggered Nuclear explosion");
         }
 
         void GeneratorExplosion()
         {
             // TODO: Send PlayerWin message
+
+            Debug.Log("Player exploded generator");
+        }
+
+        void TriggerChainReactions()
+        {
+            Explodable[] explodables = _sceneManager.allExplodables;
+
+            // Get all objects within range of chain reaction of this object
+            foreach (Explodable explodable in explodables)
+            {
+                // Ignore this object
+                if (explodable == this)
+                {
+                    continue;
+                }
+
+                // Get distance from this object to object in question
+                Transform transform = explodable.transform;
+                float distanceSqr   = (_transform.position - transform.position).sqrMagnitude;
+
+                if (distanceSqr < Mathf.Pow(_chainReactionRange, 2.0f))
+                {
+                    // Attempt to explode object within range
+                    bool chainReactionStatus = explodable.Explode("Explosion");
+                    if (!chainReactionStatus)
+                    {
+                        // Unable to explode object through chain reaction, log it
+                        Debug.LogWarning(string.Format("{0} attempted to trigger chain reaction on {1}, but failed",
+                            this.name, explodable.name));
+                    }
+                    else
+                    {
+                        Debug.Log(string.Format("{0} triggered chain reaction on {1}", this.name, explodable.name));
+                    }
+                }
+            }
+
+            _gameObject.SetActive(false);
         }
     }
 }

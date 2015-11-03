@@ -8,6 +8,7 @@ TagManager:
   - Crate
   - Generator
   - Crater
+  - Manager
   layers:
   - Default
   - TransparentFX
