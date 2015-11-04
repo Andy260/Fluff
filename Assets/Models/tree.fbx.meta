@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 9d92ff713849fc2438de6c41249ea8ec
-timeCreated: 1440214892
+guid: 06cd273983a68d54a8b65d4955f08973
+timeCreated: 1446607990
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -13,9 +13,8 @@ ModelImporter:
     2300002: tree_leaves_01
     3300000: //RootNode
     3300002: tree_leaves_01
-    4300000: tree_01
-    4300002: tree_main_01
-    4300004: tree_leaves_01
+    4300000: tree_main_01
+    4300002: tree_leaves_01
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -73,8 +72,10 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

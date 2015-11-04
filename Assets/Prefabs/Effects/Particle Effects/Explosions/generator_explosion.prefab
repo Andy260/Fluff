@@ -3465,7 +3465,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 1
+      scalar: 3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3480,7 +3480,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: .699999988
+          value: .333333343
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3689,9 +3689,9 @@ ParticleSystem:
     randomDirection: 0
   EmissionModule:
     enabled: 1
-    m_Type: 0
+    m_Type: 1
     rate:
-      scalar: 10
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3733,7 +3733,7 @@ ParticleSystem:
     time3: 0
     m_BurstCount: 0
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       scalar: 1
       maxCurve:
@@ -3741,14 +3741,14 @@ ParticleSystem:
         m_Curve:
         - time: 0
           value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          inSlope: -1
+          outSlope: -1
+          tangentMode: 10
         - time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
+          value: 0
+          inSlope: -1
+          outSlope: -1
+          tangentMode: 10
         m_PreInfinity: 2
         m_PostInfinity: 2
       minCurve:
@@ -12685,7 +12685,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
+  - {fileID: 2100000, guid: ccd18104b6e26da43bf600bf4d4ea62f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12707,7 +12707,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300006, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300008, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -12829,8 +12829,8 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
+  - {fileID: 2100000, guid: ccd18104b6e26da43bf600bf4d4ea62f, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12852,7 +12852,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300010, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300010, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -12902,8 +12902,8 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
+  - {fileID: 2100000, guid: 3a7c2e67b30c01342bb9b75cfb477792, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12925,7 +12925,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300000, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300002, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -12975,8 +12975,8 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
+  - {fileID: 2100000, guid: ccd18104b6e26da43bf600bf4d4ea62f, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -12998,7 +12998,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300004, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300004, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -13048,7 +13048,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9b56773818f170745b596972003b994d, type: 2}
+  - {fileID: 2100000, guid: ccd18104b6e26da43bf600bf4d4ea62f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -13070,7 +13070,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300008, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300006, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
@@ -13084,7 +13084,7 @@ ParticleSystemRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9d0d6bb268922f54eae09564ac9a0b54, type: 2}
+  - {fileID: 2100000, guid: ccd18104b6e26da43bf600bf4d4ea62f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -13106,7 +13106,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_SortMode: 0
-  m_Mesh: {fileID: 4300002, guid: b7154d851132c0243b5d5242dca45bab, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 69732ca59cfabca46aee90ef207ec8ef, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

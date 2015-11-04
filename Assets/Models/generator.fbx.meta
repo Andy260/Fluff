@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8950a198c3f9a4c49a2f161a6608d302
-timeCreated: 1440304009
+guid: 69732ca59cfabca46aee90ef207ec8ef
+timeCreated: 1446601535
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
@@ -92,8 +92,10 @@ ModelImporter:
     legStretch: .0500000007
     feetSpacing: 0
     rootMotionBoneName: 
+    hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  humanoidOversampling: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
