@@ -279,6 +279,16 @@ namespace Sheeplosion
 
         }
 
+        public void OnDisable()
+        {
+            _sceneManager.RemoveExplodableReference(type, this);
+        }
+
+        public void OnEnable()
+        {
+            _sceneManager.AddExplodableReference(type, this);
+        }
+
         public void OnDrawGizmosSelected()
         {
             Gizmos.color    = Color.red;

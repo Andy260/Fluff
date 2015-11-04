@@ -6,18 +6,26 @@ namespace Sheeplosion
     {
         [Header("Explosion Triggering")]
         [SerializeField]
-        uint _explosionsAmount = 2;
+        int _explosionsAmount = 2;
         [SerializeField]
         LayerMask _explodableLayers;
 
         // Explosions
-        uint _currentExplosionsCount = 0;
+        int _currentExplosionsCount = 0;
 
         // Cached scene objects
         Camera _playerCamera;
 
         // Cached GameObject properties
         Transform _transform;
+
+        public int explosionCount
+        {
+            get
+            {
+                return _currentExplosionsCount;
+            }
+        }
 
         public void Awake()
         {
