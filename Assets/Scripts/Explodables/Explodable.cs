@@ -139,8 +139,8 @@ namespace Sheeplosion
         GameObject InstantiatePrefab(GameObject a_prefab)
         {
             // Create prefab
-            GameObject instantiatedObject = Instantiate(a_prefab, _transform.position,
-                _transform.rotation) as GameObject;
+            GameObject instantiatedObject = Instantiate(a_prefab, _transform.position + a_prefab.transform.position,
+                _transform.rotation * a_prefab.transform.localRotation) as GameObject;
 
             // Hide object
             instantiatedObject.SetActive(false);
