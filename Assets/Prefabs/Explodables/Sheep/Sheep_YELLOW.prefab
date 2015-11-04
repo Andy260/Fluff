@@ -244,7 +244,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105238}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3499999, y: 0, z: 5.07000017}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 413664}
@@ -620,7 +620,8 @@ MonoBehaviour:
   _modelReference: {fileID: 120140}
   _type: 0
   _explodableByPlayer: 1
-  _chainReactionRange: 7.5
+  _chainReactionMinRange: 0
+  _chainReactionMaxRange: 10
   _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
