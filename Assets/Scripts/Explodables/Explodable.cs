@@ -122,7 +122,15 @@ namespace Sheeplosion
             }
             else if (_type == ExplodableType.Crate)
             {
+               // Create hidden sheep object
                 _hiddenSheepObject = InstantiatePrefab(_hiddenSheepPrefab);
+
+                // Disable explodable component, to prevent unwanted messages being sent
+                Explodable sheepExplodable = _hiddenSheepObject.GetComponent<Explodable>();
+                sheepExplodable.enabled = false;
+
+                // Re-enable explodable component
+                sheepExplodable.enabled = true;
             }
 
             // Calculate particle system lifetime
@@ -279,11 +287,6 @@ namespace Sheeplosion
 
         }
 
-        public void OnDisable()
-        {
-            _sceneManager.RemoveExplodableReference(type, this);
-        }
-
         public void OnEnable()
         {
             _sceneManager.AddExplodableReference(type, this);
@@ -392,6 +395,7 @@ namespace Sheeplosion
 
             TriggerChainReactions();
 
+            _sceneManager.RemoveExplodableReference(type, this);
             _gameObject.SetActive(false);
         }
 
@@ -407,6 +411,7 @@ namespace Sheeplosion
                 _hiddenSheepObject.transform.SetParent(null);
             }
 
+            _sceneManager.RemoveExplodableReference(type, this);
             _gameObject.SetActive(false);
         }
 
@@ -417,6 +422,7 @@ namespace Sheeplosion
 
             Debug.Log("Player triggered Nuclear explosion");
 
+            _sceneManager.RemoveExplodableReference(type, this);
             _gameObject.SetActive(false);
         }
 
@@ -426,6 +432,7 @@ namespace Sheeplosion
 
             Debug.Log("Player exploded generator");
 
+            _sceneManager.RemoveExplodableReference(type, this);
             _gameObject.SetActive(false);
         }
 

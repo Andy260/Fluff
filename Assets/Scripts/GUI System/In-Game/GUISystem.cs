@@ -16,6 +16,8 @@ namespace Sheeplosion.GUI
         GameObject _lossMenu;
         [SerializeField]
         GameObject _pauseMenu;
+        [SerializeField]
+        GameObject _pauseButton;
 
         // Instantiated prefabs
         GameObject _rangeDisplay;
@@ -55,29 +57,17 @@ namespace Sheeplosion.GUI
             {
                 Debug.LogError("Win Menu reference not set for GUI System");
             }
-            else
-            {
-                _winMenu.SetActive(false);
-            }
 
             // Ensure loss menu reference is not null
             if (_lossMenu == null)
             {
                 Debug.LogError("Loss Menu reference not set for GUI System");
             }
-            else
-            {
-                _lossMenu.SetActive(false);
-            }
 
             // Ensure pause menu reference is not null
             if (_pauseMenu == null)
             {
                 Debug.LogError("Pause Menu reference not set for GUI System");
-            }
-            else
-            {
-                _pauseMenu.SetActive(false);
             }
 
             // Get reference to scene manager
@@ -90,7 +80,11 @@ namespace Sheeplosion.GUI
 
         void Start()
         {
-
+            // Setup menu
+            _winMenu.SetActive(false);
+            _lossMenu.SetActive(false);
+            _pauseMenu.SetActive(false);
+            _pauseButton.SetActive(true);
         }
 
         void Update()
@@ -116,7 +110,9 @@ namespace Sheeplosion.GUI
         /// </summary>
         public void OnPlayerFailed(PlayerLoseState a_state)
         {
+            // Show loss prompt, and hide pause button
             _lossMenu.SetActive(true);
+            _pauseButton.SetActive(false);
         }
         
         /// <summary>
@@ -125,12 +121,19 @@ namespace Sheeplosion.GUI
         /// </summary>
         public void OnPlayerWon(PlayerWinState a_state)
         {
+            // Show win prompt, and hide pause button
             _winMenu.SetActive(true);
+            _pauseButton.SetActive(false);
         }
 
-        public void ShowDeveloperConsole()
+        public void LoadLevel(string a_levelName)
         {
-            Debug.developerConsoleVisible = true;
+            Application.LoadLevel(a_levelName);
+        }
+
+        public void ReloadLevel()
+        {
+            Application.LoadLevel(Application.loadedLevel);
         }
     }
 }

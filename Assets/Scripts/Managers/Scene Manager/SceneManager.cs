@@ -8,6 +8,17 @@ namespace Sheeplosion
     [DisallowMultipleComponent]
     public class SceneManager : MonoBehaviour
     {
+        /// <summary>
+        /// Used to store the current state of the player's win. 
+        /// (Used to ignore events when a state has already been determined)
+        /// </summary>
+        enum WinState
+        {
+            Win,
+            Loss,
+            None
+        }
+
         // Array of all event listeners
         [Header("Event System")]
         [Tooltip("List of objects will be notified of Scene Manager events, if able to receive such events")]
@@ -28,6 +39,9 @@ namespace Sheeplosion
 
         // List of all explodables within the scene
         List<Explodable> _explodables;
+
+        // Defines the current player win state
+        WinState _winState = WinState.None;
 
         public int sheepCount
         {
@@ -160,10 +174,21 @@ namespace Sheeplosion
 
         void RaisePlayerWinEvent(PlayerWinState a_state)
         {
+            // Ignore attempts to raise player events, when a state has been already determined
+            if (_winState != WinState.None)
+            {
+                Debug.LogWarning("Attempted to raise PlayerWin Event, but player win state has already been determined, ignoring...");
+                return;
+            }
+
+            // Notify listeners of event
             foreach (GameObject eventListener in _eventListeners)
             {
                 ExecuteEvents.Execute<ISceneManagerEvents>(eventListener, null, (x, y) => x.OnPlayerWon(a_state));
             }
+
+            // Set win state to current event
+            _winState = WinState.Win;
         }
 
         public void RemoveExplodableReference(ExplodableType a_type, Explodable a_explodable)
@@ -215,10 +240,21 @@ namespace Sheeplosion
 
         void RaisePlayerLossEvent(PlayerLoseState a_state)
         {
+            // Ignore attempts to raise player events, when a state has been already determined
+            if (_winState != WinState.None)
+            {
+                Debug.LogWarning("Attempted to raise PlayerLoss Event, but player win state has already been determined, ignoring...");
+                return;
+            }
+
+            // Notify listeners of event
             foreach (GameObject eventListener in _eventListeners)
             {
                 ExecuteEvents.Execute<ISceneManagerEvents>(eventListener, null, (x, y) => x.OnPlayerFailed(a_state));
             }
+
+            // Set win state to current event
+            _winState = WinState.Loss;
         }
     }
 }
