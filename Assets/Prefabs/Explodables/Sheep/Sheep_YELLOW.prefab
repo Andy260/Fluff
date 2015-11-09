@@ -215,7 +215,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .665000021, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447478}
@@ -585,7 +585,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.03661823, y: .799999952, z: 1}
-  m_Center: {x: 0, y: 1.08000004, z: 0}
+  m_Center: {x: 0, y: .400000006, z: 0}
 --- !u!95 &9537876
 Animator:
   serializedVersion: 3
@@ -620,6 +620,9 @@ MonoBehaviour:
   _modelReference: {fileID: 120140}
   _type: 0
   _explodableByPlayer: 1
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   _chainReactionMinRange: 0
   _chainReactionMaxRange: 10
   _explosionTime: 0
@@ -642,6 +645,18 @@ Prefab:
       propertyPath: _explosion
       value: 
       objectReference: {fileID: 142764, guid: 625d5ed4b0659034f88826cf8bff573b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: _obstacleLayerMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105238}

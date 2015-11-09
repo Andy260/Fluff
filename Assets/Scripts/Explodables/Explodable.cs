@@ -34,6 +34,10 @@ namespace Sheeplosion
         [SerializeField]
         bool _explodableByPlayer = true;
 
+        [Tooltip("Defines which layers will be blocking chain reactions")]
+        [SerializeField]
+        LayerMask _obstacleLayerMask;
+
         [Tooltip("Objects closer than this range, will not be triggered within chain reactions")]
         [SerializeField]
         float _chainReactionMinRange = 0.0f;
@@ -141,6 +145,13 @@ namespace Sheeplosion
             if (_sceneManager == null)
             {
                 Debug.LogWarning("Unable to find scene manager within scene");
+            }
+
+            // Ensure obstruction layer mask is resonable
+            if (_type == ExplodableType.Sheep && 
+                _obstacleLayerMask == new LayerMask())
+            {
+                Debug.LogWarning("Obstacle layermask not set for: " + this.name);
             }
         }
 
@@ -450,12 +461,30 @@ namespace Sheeplosion
                 }
 
                 // Get distance from this object to object in question
-                Transform transform = explodable.transform;
-                float distanceSqr   = (_transform.position - transform.position).sqrMagnitude;
+                Transform explodableTrans = explodable.transform;
+                float distanceSqr   = (_transform.position - explodableTrans.position).sqrMagnitude;
 
                 if (distanceSqr < Mathf.Pow(_chainReactionMaxRange, 2.0f) &&
                     distanceSqr > Mathf.Pow(_chainReactionMinRange, 2.0f))
                 {
+                    Ray obstacleRay = RaycastToObstacale(explodableTrans.position);
+
+                    // Ensure no obstacles obstruct this chain reaction
+                    RaycastHit raycastHit;
+                    if (Physics.Raycast(obstacleRay, out raycastHit, Mathf.Infinity, _obstacleLayerMask, 
+                            QueryTriggerInteraction.UseGlobal))
+                    {
+                        // Log this occurance
+                        Debug.Log(string.Format("{0} is unable to trigger chain reaction on {1}, obstacle {2} is blocking it", 
+                            this.name, explodable.name, raycastHit.collider.name));
+
+                        // Draw ray to object
+                        Debug.DrawLine(obstacleRay.origin, explodableTrans.position, Color.red, 5.0f);
+
+                        // Ignore this object
+                        continue;
+                    }
+
                     // Attempt to explode object within range
                     bool chainReactionStatus = explodable.Explode("Explosion");
                     if (!chainReactionStatus)
@@ -470,6 +499,25 @@ namespace Sheeplosion
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Constructs a from the current position of this explodable
+        /// offset by the minimum chain reaction distance
+        /// </summary>
+        /// <param name="a_obstacalePos">The position of the obstacle</param>
+        /// <returns></returns>
+        Ray RaycastToObstacale(Vector3 a_obstacalePos)
+        {
+            // Calculate direction to obstacle
+            Vector3 directionToObstacale = a_obstacalePos - _transform.position;
+            directionToObstacale.Normalize();
+
+            // Offset origin by chain reaction minimum range
+            Vector3 origin = _transform.position + (directionToObstacale * _chainReactionMinRange);
+
+            // Generate ray
+            return new Ray(origin, directionToObstacale);
         }
     }
 }

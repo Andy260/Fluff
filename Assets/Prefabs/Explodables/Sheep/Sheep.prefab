@@ -614,11 +614,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db9f3cd3fcb6d149a9f12910e3c9fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionParticleEffect: {fileID: 0}
-  _craterModel: {fileID: 0}
+  _explosionPrefab: {fileID: 0}
+  _craterPrefab: {fileID: 0}
+  _hiddenSheepPrefab: {fileID: 0}
+  _modelReference: {fileID: 0}
   _type: 0
   _explodableByPlayer: 1
-  _chainReactionRange: 4
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  _chainReactionMinRange: 0
+  _chainReactionMaxRange: 10
   _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
@@ -630,6 +636,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: _chainReactionRange
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _obstacleLayerMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
