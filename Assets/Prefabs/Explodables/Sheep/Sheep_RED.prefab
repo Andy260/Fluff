@@ -623,8 +623,8 @@ MonoBehaviour:
   _obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  _chainReactionMinRange: 0
-  _chainReactionMaxRange: 10
+  _chainReactionMinRange: 7.69999981
+  _chainReactionMaxRange: 12.8500004
   _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:

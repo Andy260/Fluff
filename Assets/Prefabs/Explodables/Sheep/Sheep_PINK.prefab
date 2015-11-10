@@ -624,7 +624,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _chainReactionMinRange: 0
-  _chainReactionMaxRange: 12.6800003
+  _chainReactionMaxRange: 7.73000002
   _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
