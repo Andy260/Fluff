@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 462738}
   - 65: {fileID: 6516570}
-  - 114: {fileID: 11440368}
+  - 114: {fileID: 11438726}
   m_Layer: 8
   m_Name: Crate
   m_TagString: Crate
@@ -120,7 +120,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11440368
+--- !u!114 &11438726
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -128,10 +128,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 151476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c6d8409eba94ac459f5d5d9aad52176, type: 3}
+  m_Script: {fileID: 11500000, guid: 1db9f3cd3fcb6d149a9f12910e3c9fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 142764, guid: 47b0159875fd37c4a81c4054a77f335e, type: 2}
+  _explosionPrefab: {fileID: 129688, guid: d4ca4063a93152b4d953342f1102438a, type: 2}
+  _craterPrefab: {fileID: 0}
+  _hiddenSheepPrefab: {fileID: 153152, guid: 30e4dd3bdde035345aa747b8bc3bb4b6, type: 2}
+  _modelReference: {fileID: 0}
+  _type: 1
+  _explodableByPlayer: 1
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _chainReactionMinRange: 0
+  _chainReactionMaxRange: 0
+  _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

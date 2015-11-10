@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .74000001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476358}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.1400001, y: 0, z: 10.5799999}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427456}
@@ -137,7 +137,11 @@ MonoBehaviour:
   _modelReference: {fileID: 161700}
   _type: 1
   _explodableByPlayer: 0
-  _chainReactionRange: 0
+  _obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _chainReactionMinRange: 0
+  _chainReactionMaxRange: 10
   _explosionTime: 0
 --- !u!1001 &100100000
 Prefab:
