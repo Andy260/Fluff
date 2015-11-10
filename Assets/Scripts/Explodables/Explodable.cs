@@ -315,22 +315,38 @@ namespace Sheeplosion
 
         public void OnDrawGizmosSelected()
         {
-            Gizmos.color    = Color.red;
             Gizmos.matrix   = transform.localToWorldMatrix;
 
             if (_type == ExplodableType.Sheep)
             {
-                // Render chain reaction range gizmo
+                // Render max chain reaction range gizmo
+                Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(Vector3.zero, _chainReactionMaxRange);
+
+                // Render min chain reaction range gizmo
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(Vector3.zero, _chainReactionMinRange);
             }
             else if (_type == ExplodableType.Crate)
             {
                 // Render chain reaction range gizmo for hidden sheep
                 if (_hiddenSheepPrefab != null)
                 {
-                    float range = _hiddenSheepPrefab.GetComponent<Explodable>()._chainReactionMaxRange;
+                    Explodable explodable = _hiddenSheepPrefab.GetComponent<Explodable>();
+
+                    // Max range
+                    Gizmos.color = Color.red;
+
+                    float range = explodable._chainReactionMaxRange;
+                    Gizmos.DrawWireSphere(Vector3.zero, range);
+
+                    // Min Range
+                    Gizmos.color = Color.green;
+
+                    range = explodable._chainReactionMinRange;
                     Gizmos.DrawWireSphere(Vector3.zero, range);
                 }
+
             }
         }
 
