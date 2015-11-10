@@ -61,6 +61,9 @@ namespace Sheeplosion
         // Scene manager reference within scene
         SceneManager _sceneManager;
 
+        // Reference to Nuke Failure Effect
+        NukeFailureEffect _nukeFailureEffect;
+
         // Cached GameObject properties
         Transform _transform;
         GameObject _gameObject;
@@ -152,6 +155,13 @@ namespace Sheeplosion
                 _obstacleLayerMask == new LayerMask())
             {
                 Debug.LogWarning("Obstacle layermask not set for: " + this.name);
+            }
+
+            // Get reference to Nuke Failure Effect
+            _nukeFailureEffect = FindObjectOfType<NukeFailureEffect>();
+            if (_nukeFailureEffect == null)
+            {
+                Debug.LogWarning("Unable to find Nuke Failure Effect script within the scene, effect will not be triggered");
             }
         }
 
@@ -380,6 +390,7 @@ namespace Sheeplosion
 
                 case ExplodableType.NuclearSheep:
                     Invoke("NuclearSheepExplosion", chainReactionTime);
+                    _nukeFailureEffect.enabled = true;
                     break;
 
                 case ExplodableType.Generator:

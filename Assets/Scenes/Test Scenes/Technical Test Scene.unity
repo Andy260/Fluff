@@ -673,6 +673,34 @@ Transform:
   - {fileID: 1775495184}
   m_Father: {fileID: 886087362}
   m_RootOrder: 0
+--- !u!1 &659272808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 659272809}
+  m_Layer: 0
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &659272809
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659272808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1166568788}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!4 &663057940 stripped
 Transform:
   m_PrefabParentObject: {fileID: 498960, guid: 413e0d821bda76743a03098445f89f76, type: 2}
@@ -1168,10 +1196,105 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 192538, guid: 0aba5d8a029af564aa8c142a2bde8027, type: 2}
   m_PrefabInternal: {fileID: 173732034}
+--- !u!1001 &1136254979
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1166568788}
+    m_Modifications:
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &1136254980 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 428796, guid: cc6ce03afac7a5240899428b998ce20e, type: 2}
+  m_PrefabInternal: {fileID: 1136254979}
+--- !u!1 &1166568787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1166568788}
+  m_Layer: 0
+  m_Name: Camera Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166568788
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1166568787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1136254980}
+  m_Father: {fileID: 659272809}
+  m_RootOrder: 0
 --- !u!4 &1169148700 stripped
 Transform:
   m_PrefabParentObject: {fileID: 433742, guid: c0f75b2cd1646d94a9b44da2d23572a4, type: 2}
   m_PrefabInternal: {fileID: 1439143454}
+--- !u!1 &1178971717 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 120928, guid: 9c04fb2fdd11659418d3dc805667b0dc, type: 2}
+  m_PrefabInternal: {fileID: 1320286115}
+--- !u!114 &1178971718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1178971717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 1.5
+  intensity: 2.5
+  blurSize: 5.5
+  blurIterations: 4
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!4 &1226968245 stripped
 Transform:
   m_PrefabParentObject: {fileID: 489872, guid: 07ee5ae2f33eddc40a49fca4c4ee00d1, type: 2}
