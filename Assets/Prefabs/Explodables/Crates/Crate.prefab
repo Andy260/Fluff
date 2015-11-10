@@ -139,7 +139,7 @@ MonoBehaviour:
   _explodableByPlayer: 1
   _obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
   _chainReactionMinRange: 0
   _chainReactionMaxRange: 0
   _explosionTime: 0
@@ -156,6 +156,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _obstacleLayerMask.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
