@@ -101,8 +101,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.13471031, y: 1.11044097, z: 1.13076246}
-  m_Center: {x: -.00995779037, y: 1.24133313, z: .00197696686}
+  m_Size: {x: 1.08864939, y: 1.07709098, z: 1.04856312}
+  m_Center: {x: .000324249268, y: .506786704, z: .0242815614}
 --- !u!95 &9530654
 Animator:
   serializedVersion: 3
@@ -166,6 +166,10 @@ Prefab:
       propertyPath: _explosion
       value: 
       objectReference: {fileID: 129688, guid: d4ca4063a93152b4d953342f1102438a, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 133140}
