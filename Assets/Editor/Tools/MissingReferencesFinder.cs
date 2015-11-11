@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MissingReferencesFinder : MonoBehaviour
 {
-    [MenuItem("Tools/Show Missing Object References in scene", false, 50)]
+    [MenuItem("Tools/Find Missing References/In current scene", false, 50)]
     public static void FindMissingReferencesInCurrentScene()
     {
         var objects = GetSceneObjects();
         FindMissingReferences(EditorApplication.currentScene, objects);
     }
 
-    [MenuItem("Tools/Show Missing Object References in all scenes", false, 51)]
+    [MenuItem("Tools/Find Missing References/In all scenes", false, 51)]
     public static void MissingSpritesInAllScenes()
     {
         foreach (var scene in EditorBuildSettings.scenes.Where(s => s.enabled))
@@ -22,7 +22,7 @@ public class MissingReferencesFinder : MonoBehaviour
         }
     }
 
-    [MenuItem("Tools/Show Missing Object References in assets", false, 52)]
+    [MenuItem("Tools/Find Missing References/In assets", false, 52)]
     public static void MissingSpritesInAssets()
     {
         var allAssets = AssetDatabase.GetAllAssetPaths();

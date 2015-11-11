@@ -50,6 +50,13 @@ namespace Sheeplosion
         [SerializeField]
         float _explosionTime = 0.0f;
 
+#if UNITY_EDITOR
+        [Header("Editor Only")]
+        [Tooltip("Always displays range gizmo for this explodable within the scene")]
+        [SerializeField]
+        bool _alwaysShowRangeGizmo = true;
+#endif
+
         // Precalulated particle System lifetime
         float _particleSystemLifeTime = 0.0f;
         
@@ -313,19 +320,37 @@ namespace Sheeplosion
             _sceneManager.AddExplodableReference(type, this);
         }
 
+#if UNITY_EDITOR
+        public void DrawRangeGizmo(Explodable a_explodable)
+        {
+            Gizmos.color = Color.red;
+
+            // Max range
+            float range = a_explodable._chainReactionMaxRange;
+            Gizmos.DrawWireSphere(Vector3.zero, range);
+
+            Gizmos.color = Color.green;
+
+            // Min Range
+            range = a_explodable._chainReactionMinRange;
+            Gizmos.DrawWireSphere(Vector3.zero, range);
+        }
+
         public void OnDrawGizmosSelected()
         {
+            if (_alwaysShowRangeGizmo)
+            {
+                // Don't render range gizmos on select
+                // if globally showing range
+                return;
+            }
+
             Gizmos.matrix   = transform.localToWorldMatrix;
 
+            // Render range gizmo
             if (_type == ExplodableType.Sheep)
             {
-                // Render max chain reaction range gizmo
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(Vector3.zero, _chainReactionMaxRange);
-
-                // Render min chain reaction range gizmo
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(Vector3.zero, _chainReactionMinRange);
+                DrawRangeGizmo(this);
             }
             else if (_type == ExplodableType.Crate)
             {
@@ -334,21 +359,39 @@ namespace Sheeplosion
                 {
                     Explodable explodable = _hiddenSheepPrefab.GetComponent<Explodable>();
 
-                    // Max range
-                    Gizmos.color = Color.red;
-
-                    float range = explodable._chainReactionMaxRange;
-                    Gizmos.DrawWireSphere(Vector3.zero, range);
-
-                    // Min Range
-                    Gizmos.color = Color.green;
-
-                    range = explodable._chainReactionMinRange;
-                    Gizmos.DrawWireSphere(Vector3.zero, range);
+                    DrawRangeGizmo(explodable);
                 }
-
             }
         }
+
+        public void OnDrawGizmos()
+        {
+            // Only render if set to globally display on all
+            // explodables
+            if (!_alwaysShowRangeGizmo)
+            {
+                return;
+            }
+
+            Gizmos.matrix = transform.localToWorldMatrix;
+
+            // Render range gizmo
+            if (_type == ExplodableType.Sheep)
+            {
+                DrawRangeGizmo(this);
+            }
+            else if (_type == ExplodableType.Crate)
+            {
+                // Render chain reaction range gizmo for hidden sheep
+                if (_hiddenSheepPrefab != null)
+                {
+                    Explodable explodable = _hiddenSheepPrefab.GetComponent<Explodable>();
+
+                    DrawRangeGizmo(explodable);
+                }
+            }
+        }
+#endif
 
         /// <summary>
         /// Begins the explosion routine. 
