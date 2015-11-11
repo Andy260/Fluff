@@ -58,12 +58,24 @@ namespace Sheeplosion
             }
         }
 
+        void Update()
+        {
+
+        }
+
         /// <summary>
         /// Will first raycast for any objects which the player is able to explode
         /// then attempt to trigger them to explode
         /// </summary>
         public void TriggerExplosion(Vector3 a_inputPosition)
         {
+            // Only execute this function if this
+            // component is enabled
+            if (!this.enabled)
+            {
+                return;
+            }
+
             // Ensure player has enough explosions left
             // to trigger another
             if (explosionCount <= 0)

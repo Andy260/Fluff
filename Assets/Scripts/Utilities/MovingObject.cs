@@ -29,17 +29,18 @@ namespace Sheeplosion.Utilities
 
         [Space(10)]
         [SerializeField]
-        float _steeringBehaviourMass;
-
-        [SerializeField]
-        float _steeringBehaviourDistanceTolerance;
+        float _steeringBehaviourTolerance;
 
         // Movement
         int _transformID;
 
+        Vector3 _velocity;
+
         // Lerping values
         float _rawLerp;
         float _lerpTime;
+
+        Vector3 _startPosition;
 
         // Cached GameObject properties
         Transform _transform;
@@ -59,6 +60,7 @@ namespace Sheeplosion.Utilities
         void Start()
         {
             _transformID = 0;
+            _startPosition = _transform.position;
         }
 
         void Update()
@@ -84,26 +86,27 @@ namespace Sheeplosion.Utilities
             }
 
             // Rotate towards next node
-            _transform.LookAt(currentTransform);
+            //_transform.LookAt(currentTransform);
         }
 
         void SteeringBehaviourMovement(Transform a_currentTransform)
         {
-            Vector3 dirToTarget = a_currentTransform.position - _transform.position;
-            dirToTarget.Normalize();
+            Vector3 desiredVelo = a_currentTransform.position - _transform.position;
+            desiredVelo.Normalize();
+            desiredVelo *= _movementSpeed;
 
-            Vector3 velocity = dirToTarget * _movementSpeed;
-            Vector3 desieredVelo = dirToTarget * _movementSpeed;
-            Vector3 steering = desieredVelo - velocity;
+            Vector3 force = desiredVelo - _velocity;
 
-            steering = Vector3.ClampMagnitude(steering, _movementSpeed);
-            steering = steering / 0.1f;
+            _velocity = force * Time.deltaTime;
+            _transform.position += _velocity * Time.deltaTime;
 
-            velocity = Vector3.ClampMagnitude(velocity + steering, _movementSpeed);
+            Debug.DrawLine(_transform.position, _transform.position + _velocity);
 
-            _transform.position += velocity * Time.deltaTime;
+            Quaternion rotation = _transform.rotation;
+            rotation.eulerAngles = _velocity.normalized;
+            _transform.rotation = rotation;
 
-            if ((a_currentTransform.position - _transform.position).sqrMagnitude < _steeringBehaviourDistanceTolerance)
+            if ((a_currentTransform.position - _transform.position).sqrMagnitude < _steeringBehaviourTolerance)
             {
                 IncrementTransformID();
             }
@@ -125,7 +128,7 @@ namespace Sheeplosion.Utilities
             }
 
             // Lerp to next target
-            _transform.position = Vector3.Lerp(_transform.position, a_currentTransform.position, _lerpTime);
+            _transform.position = Vector3.Lerp(_startPosition, a_currentTransform.position, _lerpTime);
         }
 
         void IncrementTransformID()
@@ -139,6 +142,8 @@ namespace Sheeplosion.Utilities
             {
                 _transformID = 0;
             }
+
+            _startPosition = _transform.position;
         }
     }
 }
