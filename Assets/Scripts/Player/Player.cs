@@ -23,7 +23,7 @@ namespace Sheeplosion
         {
             get
             {
-                return _currentExplosionsCount;
+                return _explosionsAmount - _currentExplosionsCount;
             }
         }
 

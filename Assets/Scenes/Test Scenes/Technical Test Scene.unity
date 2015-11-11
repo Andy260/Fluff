@@ -133,6 +133,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11446314, guid: 65d8959adf691834ea80b2b7d1ee4692, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65d8959adf691834ea80b2b7d1ee4692, type: 2}
   m_IsPrefabParent: 0
@@ -460,6 +464,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11459724, guid: e447d75c3712bf74f848240b12e8ac20, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e447d75c3712bf74f848240b12e8ac20, type: 2}
   m_IsPrefabParent: 0
@@ -513,6 +521,10 @@ Prefab:
     - target: {fileID: 173592, guid: 853eb40b517a35141bc9dc4d87f2f17c, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404744, guid: 853eb40b517a35141bc9dc4d87f2f17c, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 853eb40b517a35141bc9dc4d87f2f17c, type: 2}
@@ -619,6 +631,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11426586, guid: 1d2ef9eb50f11144a9f8e2c8d7824e33, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d2ef9eb50f11144a9f8e2c8d7824e33, type: 2}
   m_IsPrefabParent: 0
@@ -699,6 +715,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11463518, guid: f26b07ebd36e8e14896080740f4f5395, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f26b07ebd36e8e14896080740f4f5395, type: 2}
   m_IsPrefabParent: 0
@@ -741,6 +761,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11446314, guid: 65d8959adf691834ea80b2b7d1ee4692, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65d8959adf691834ea80b2b7d1ee4692, type: 2}
   m_IsPrefabParent: 0
@@ -781,6 +805,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417436, guid: e79d77d48d6d5224897a814a411c1d28, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11441476, guid: e79d77d48d6d5224897a814a411c1d28, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1080,6 +1108,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11404744, guid: 853eb40b517a35141bc9dc4d87f2f17c, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 853eb40b517a35141bc9dc4d87f2f17c, type: 2}
   m_IsPrefabParent: 0
@@ -1126,6 +1158,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 9030c3209473f2e458b55b53af72ade6, type: 2}
+    - target: {fileID: 11471658, guid: 6c94950ecb5ad5a47b832019e9cdff54, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c94950ecb5ad5a47b832019e9cdff54, type: 2}
   m_IsPrefabParent: 0
@@ -1198,11 +1234,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11455568, guid: 9c04fb2fdd11659418d3dc805667b0dc, type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11455360, guid: 9c04fb2fdd11659418d3dc805667b0dc, type: 2}
       propertyPath: _explosionsAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9c04fb2fdd11659418d3dc805667b0dc, type: 2}
@@ -1285,6 +1321,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11434828, guid: c72bc4d788285d84b80f60c111cad070, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c72bc4d788285d84b80f60c111cad070, type: 2}
   m_IsPrefabParent: 0
@@ -1330,6 +1370,10 @@ Prefab:
     - target: {fileID: 198664, guid: c0f75b2cd1646d94a9b44da2d23572a4, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11485276, guid: c0f75b2cd1646d94a9b44da2d23572a4, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f75b2cd1646d94a9b44da2d23572a4, type: 2}
@@ -1458,6 +1502,10 @@ Prefab:
     - target: {fileID: 111394, guid: 07ee5ae2f33eddc40a49fca4c4ee00d1, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11469018, guid: 07ee5ae2f33eddc40a49fca4c4ee00d1, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 07ee5ae2f33eddc40a49fca4c4ee00d1, type: 2}
@@ -1611,6 +1659,10 @@ Prefab:
     - target: {fileID: 476358, guid: 15161d913ba057e42b93bbe7be7f42fc, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11468142, guid: 15161d913ba057e42b93bbe7be7f42fc, type: 2}
+      propertyPath: _alwaysShowRangeGizmo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15161d913ba057e42b93bbe7be7f42fc, type: 2}
