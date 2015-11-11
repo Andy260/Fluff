@@ -534,14 +534,17 @@ namespace Sheeplosion
                 Transform explodableTrans = explodable.transform;
                 float distanceSqr   = (_transform.position - explodableTrans.position).sqrMagnitude;
 
-                if (distanceSqr < Mathf.Pow(_chainReactionMaxRange, 2.0f) &&
-                    distanceSqr > Mathf.Pow(_chainReactionMinRange, 2.0f))
+                float maxRangeSqr = Mathf.Pow(_chainReactionMaxRange, 2.0f);
+                float minRangeSqr = Mathf.Pow(_chainReactionMinRange, 2.0f);
+
+                if (distanceSqr < maxRangeSqr &&
+                    distanceSqr > minRangeSqr)
                 {
                     Ray obstacleRay = RaycastToObstacale(explodableTrans.position);
 
                     // Ensure no obstacles obstruct this chain reaction
                     RaycastHit raycastHit;
-                    if (Physics.Raycast(obstacleRay, out raycastHit, Mathf.Infinity, _obstacleLayerMask, 
+                    if (Physics.Raycast(obstacleRay, out raycastHit, Mathf.Pow(distanceSqr, 0.5f), _obstacleLayerMask, 
                             QueryTriggerInteraction.UseGlobal))
                     {
                         // Log this occurance
@@ -549,7 +552,7 @@ namespace Sheeplosion
                             this.name, explodable.name, raycastHit.collider.name));
 
                         // Draw ray to object
-                        Debug.DrawLine(obstacleRay.origin, explodableTrans.position, Color.red, 5.0f);
+                        Debug.DrawLine(obstacleRay.origin, raycastHit.transform.position, Color.red, 5.0f);
 
                         // Ignore this object
                         continue;

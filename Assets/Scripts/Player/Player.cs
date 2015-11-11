@@ -66,7 +66,7 @@ namespace Sheeplosion
         {
             // Ensure player has enough explosions left
             // to trigger another
-            if (_currentExplosionsCount > _explosionsAmount)
+            if (explosionCount <= 0)
             {
                 Debug.Log("Player is out of explosions");
                 return;
