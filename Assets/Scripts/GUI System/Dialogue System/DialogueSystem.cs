@@ -95,6 +95,14 @@ namespace Sheeplosion.GUI.Dialogue
 
         public void OnEnable()
         {
+            if (_dialogueArray == null ||
+                _dialogueArray.Length <= 0)
+            {
+                _gameObject.SetActive(false);
+
+                return;
+            }
+
             // Disable player, until messages have all shown
             _player.enabled                 = false;
             _playerCameraController.enabled = false;

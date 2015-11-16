@@ -9,6 +9,7 @@ TagManager:
   - Generator
   - Crater
   - Manager
+  - Menu Item
   layers:
   - Default
   - TransparentFX
