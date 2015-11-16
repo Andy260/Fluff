@@ -28,3 +28,8 @@ Assets/UnityVS/Editor/UnityVS.VersionSpecific.dll.meta
 *.fbx
 *.png
 *.tga
+*.asset
+*.wav
+*.mp3
+*.ogg
+*.psd
