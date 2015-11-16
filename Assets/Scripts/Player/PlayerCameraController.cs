@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace Sheeplosion
 {
+    [RequireComponent(typeof(Camera))]
     public class PlayerCameraController : MonoBehaviour
     {
         [Header("Movement")]
@@ -10,22 +11,12 @@ namespace Sheeplosion
         [Tooltip("Speed at which the player is able to move the camere")]
         float _speed;
 
-        // Reference to main camera
-        Camera _camera;
-
         // Cached GameObject properties
         Transform _transform;
 
         public void Awake()
         {
             _transform = transform;
-
-            // Get reference to the camera
-            _camera = GetComponentInChildren<Camera>();
-            if (_camera == null)
-            {
-                Debug.LogError("Can't find camera in children of touch camera controller");
-            }
         }
 
         void Update()

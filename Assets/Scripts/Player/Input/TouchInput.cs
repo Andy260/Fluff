@@ -35,7 +35,6 @@ namespace Sheeplosion
 
             _mainCamera = _cameraController.GetComponentInChildren<Camera>();
 
-
             // Get reference to player
             _player = FindObjectOfType<Player>();
             if (_player == null)
@@ -46,45 +45,54 @@ namespace Sheeplosion
 
         void Update()
         {
-            HandleTranslation();
-            HandleExplodeTriggers();
+            if (Input.touchCount == 1)
+            {
+                Touch firstTouch = Input.GetTouch(0);
+
+                if (firstTouch.phase == TouchPhase.Moved)
+                {
+                    HandleTranslation(firstTouch);
+                }
+                else if (firstTouch.phase == TouchPhase.Ended)
+                {
+                    HandleExplodeTriggers();
+                }
+            }
+            else if (Input.touchCount == 2)
+            {
+                // TODO: Handle zoom gestures
+            }
         }
 
-        void HandleTranslation()
+        void HandleTranslation(Touch a_touch)
         {
             Vector3 translation = Vector3.zero;
 
 #if UNITY_EDITOR
-            // Calculate mouse delta
-            Vector3 currentMouseDelta = mouseDelta;
-
-            if (Input.GetMouseButton(0))
+            if (Input.touchSupported)
             {
-                // Calculate mouse delta, and apply translation
-                translation = new Vector3(mouseDelta.x, 0.0f, mouseDelta.y);
-                _cameraController.TranslateCamera(-translation);
-            }
+                // Calculate mouse delta
+                Vector3 currentMouseDelta = mouseDelta;
 
-            // Update last mouse position for next frame
-            _lastMousePos = Input.mousePosition;
+                if (Input.GetMouseButton(0))
+                {
+                    // Calculate mouse delta, and apply translation
+                    translation = new Vector3(mouseDelta.x, 0.0f, mouseDelta.y);
+                    _cameraController.TranslateCamera(-translation);
+                }
 
-            return;
-#else
-            if (Input.touchCount > 1 ||
-                Input.touchCount < 1)
-            {
-                // Ignore accidental multi-finger gestures
+                // Update last mouse position for next frame
+                _lastMousePos = Input.mousePosition;
+
                 return;
             }
-
+#endif
             // Get touch delta
-            Touch touch = Input.GetTouch(0);
-            Vector2 deltaTouchPos = -touch.deltaPosition;
+            Vector2 deltaTouchPos = a_touch.deltaPosition;
 
             // Apply transaltion
             translation = new Vector3(deltaTouchPos.x, 0.0f, deltaTouchPos.y);
             _cameraController.TranslateCamera(-translation);
-#endif
         }
 
         void HandleExplodeTriggers()
@@ -93,12 +101,15 @@ namespace Sheeplosion
             // TODO: Fix bug where single touch gesture
             // triggers explosion at the end of drag gestures
 
-            if (Input.GetMouseButtonUp(0) &&
-                mouseDelta == Vector3.zero)
+            if (Input.touchSupported)
             {
-                _player.TriggerExplosion(Input.mousePosition);
+                if (Input.GetMouseButtonUp(0) &&
+                mouseDelta == Vector3.zero)
+                {
+                    _player.TriggerExplosion(Input.mousePosition);
+                }
             }
-#else
+#endif
             if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
@@ -108,7 +119,6 @@ namespace Sheeplosion
                     _player.TriggerExplosion(touch.position);
                 }
             }
-#endif
         }
     }
 }
