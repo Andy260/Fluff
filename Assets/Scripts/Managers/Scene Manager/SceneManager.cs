@@ -174,6 +174,8 @@ namespace Sheeplosion
 
         void RaisePlayerWinEvent(PlayerWinState a_state)
         {
+            CancelInvoke();
+
             // Ignore attempts to raise player events, when a state has been already determined
             if (_winState != WinState.None)
             {
@@ -212,9 +214,12 @@ namespace Sheeplosion
             switch (a_type)
             {
                 case ExplodableType.Sheep:
-                    if (_player.explosionCount <= 0 && sheepCount > 0)
+                    if (_player.explosionCount <= 0 && sheepCount > 0 &&
+                        _generators.Count > 0)
                     {
-                        RaisePlayerLossEvent(PlayerLoseState.NoExplosionsLeft);
+                        // HACK: Fixes bug where having no explodables with
+                        // an explosions left fails player
+                        Invoke("NoExplosionsLeftFailure", 1.0f);
                     }
                     else if (sheepCount <= 0)
                     {
@@ -240,6 +245,8 @@ namespace Sheeplosion
 
         void RaisePlayerLossEvent(PlayerLoseState a_state)
         {
+            CancelInvoke();
+
             // Ignore attempts to raise player events, when a state has been already determined
             if (_winState != WinState.None)
             {
@@ -255,6 +262,11 @@ namespace Sheeplosion
 
             // Set win state to current event
             _winState = WinState.Loss;
+        }
+
+        void NoExplosionsLeftFailure()
+        {
+            RaisePlayerLossEvent(PlayerLoseState.NoExplosionsLeft);
         }
     }
 }

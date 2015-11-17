@@ -18,7 +18,8 @@ namespace Sheeplosion.Utilities
 
         void Start()
         {
-
+            // HACK: Used to reset time scale, fixing frozen main menu from pause bug
+            Time.timeScale = 1.0f;
         }
 
         void Update()

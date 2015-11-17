@@ -565,7 +565,8 @@ MonoBehaviour:
     m_Bits: 0
   _chainReactionMinRange: 0
   _chainReactionMaxRange: 10
-  _explosionTime: 0
+  _explosionTime: .100000001
+  _alwaysShowRangeGizmo: 1
 --- !u!198 &19831834
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3845,6 +3846,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _explosionTime
+      value: .100000001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
