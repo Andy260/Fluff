@@ -56,8 +56,6 @@ namespace Sheeplosion.GUI.Dialogue
 
         void AnimateText()
         {
-            Debug.Log("Text animating...");
-
             // Show text
             _text.text = _dialogue.Substring(0, _textPosition);
             

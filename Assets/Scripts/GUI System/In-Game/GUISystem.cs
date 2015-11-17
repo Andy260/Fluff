@@ -213,12 +213,19 @@ namespace Sheeplosion.GUI
 
         public void LoadLevel(string a_levelName)
         {
+            Time.timeScale = 1.0f;
             Application.LoadLevel(a_levelName);
         }
 
         public void ReloadLevel()
         {
+            Time.timeScale = 1.0f;
             Application.LoadLevel(Application.loadedLevel);
+        }
+
+        public void LoadNextLevel()
+        {
+            Application.LoadLevel(Application.loadedLevel + 1);
         }
     }
 }
