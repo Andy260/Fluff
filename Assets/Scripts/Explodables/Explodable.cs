@@ -472,8 +472,6 @@ namespace Sheeplosion
 
         void SheepExplosion()
         {
-            // TODO: Alert Scene manager of sheep being destroyed
-
             TriggerChainReactions();
 
             _sceneManager.RemoveExplodableReference(type, this);
@@ -498,9 +496,6 @@ namespace Sheeplosion
 
         void NuclearSheepExplosion()
         {
-            // TODO: Play nuclear sheep loss effect
-            // explode all explodables, and send failure message
-
             Debug.Log("Player triggered Nuclear explosion");
 
             _sceneManager.RemoveExplodableReference(type, this);
@@ -509,14 +504,15 @@ namespace Sheeplosion
 
         void GeneratorExplosion()
         {
-            // TODO: Send PlayerWin message
-
             Debug.Log("Player exploded generator");
 
             _sceneManager.RemoveExplodableReference(type, this);
             _gameObject.SetActive(false);
         }
 
+        /// <summary>
+        /// Attempts to explode explodables within the range of this explodable
+        /// </summary>
         void TriggerChainReactions()
         {
             Explodable[] explodables = _sceneManager.allExplodables;

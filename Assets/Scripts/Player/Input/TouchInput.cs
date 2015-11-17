@@ -98,9 +98,6 @@ namespace Sheeplosion
         void HandleExplodeTriggers()
         {
 #if UNITY_EDITOR
-            // TODO: Fix bug where single touch gesture
-            // triggers explosion at the end of drag gestures
-
             if (Input.touchSupported)
             {
                 if (Input.GetMouseButtonUp(0) &&
