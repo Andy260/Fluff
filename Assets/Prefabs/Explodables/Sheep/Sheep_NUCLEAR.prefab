@@ -584,7 +584,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.03661823, y: .799999952, z: 1}
+  m_Size: {x: 2.77999997, y: .799999952, z: 2.77999997}
   m_Center: {x: 0, y: .400000006, z: 0}
 --- !u!95 &9598772
 Animator:
@@ -673,6 +673,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: _explosionTime
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 2.77999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.z
+      value: 2.77999997
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
