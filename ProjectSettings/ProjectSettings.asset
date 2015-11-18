@@ -488,7 +488,7 @@ PlayerSettings:
   WebGL::template: APPLICATION:Default
   additionalIl2CppArgs::additionalIl2CppArgs: 
   firstStreamedSceneWithResources: 0
-  cloudProjectId: b479bb7f-006a-47b4-bb58-0d10bb1ef8b9
-  projectName: Sheeplosion
-  organizationId: incubator-studio
+  cloudProjectId: 
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
