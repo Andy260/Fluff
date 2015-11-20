@@ -49,7 +49,8 @@ namespace Sheeplosion
             {
                 Touch firstTouch = Input.GetTouch(0);
 
-                if (firstTouch.phase == TouchPhase.Moved)
+                if (firstTouch.phase == TouchPhase.Moved ||
+                    firstTouch.phase == TouchPhase.Stationary)
                 {
                     HandleTranslation(firstTouch);
                 }
@@ -60,7 +61,16 @@ namespace Sheeplosion
             }
             else if (Input.touchCount == 2)
             {
-                // TODO: Handle zoom gestures
+                Touch firstTouch = Input.GetTouch(0);
+                Touch secondTouch = Input.GetTouch(1);
+
+                Vector2 firstTouchPrevPos = firstTouch.position - firstTouch.deltaPosition;
+                Vector2 secondTouchPrevPos = secondTouch.position - secondTouch.deltaPosition;
+
+                float prevTouchDeltaMag = (firstTouchPrevPos - secondTouchPrevPos).magnitude;
+                float touchDeltaMag = (firstTouch.position - secondTouch.position).magnitude;
+
+                _cameraController.ZoomCamera(prevTouchDeltaMag - touchDeltaMag);
             }
         }
 
