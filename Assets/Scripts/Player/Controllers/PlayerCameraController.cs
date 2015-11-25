@@ -11,6 +11,10 @@ namespace Sheeplosion
         [SerializeField]
         float _speed;
 
+        [Tooltip("Controls the max bleed speed once a touch has ended")]
+        [SerializeField]
+        float _maxSpeed;
+
         [SerializeField]
         float _zoomSpeed;
 
@@ -30,27 +34,42 @@ namespace Sheeplosion
         [HideInInspector]
         Transform _transform;
 
+        // Child camera
+        [HideInInspector]
         Camera _camera;
+        [HideInInspector]
         Transform _camTransform;
 
         public void Awake()
         {
+            // Cache game object properties
             _transform = transform;
 
+            // Get reference to camera child component
             _camera = GetComponentInChildren<Camera>();
             if (_camera == null)
             {
                 Debug.Log(string.Format("({0}) Unable to find Child camera", this.name));
             }
+
+            // Cache child camera transform property
+            _camTransform = _camera.transform;
+
+            // Ensure zoom settings are valid
+            if (_minZoomHeight < 0.1f)
+            {
+                Debug.LogWarning(string.Format("({0}) Invalid Minimum zoom height, setting to 0.1", this.name));
+                _minZoomHeight = 1.0f;
+            }
         }
 
-        public void FixedUpdate()
+        void Update()
         {
             // Translate camera
-            _transform.Translate(_velocity * Time.fixedDeltaTime);
+            _transform.Translate(_velocity * Time.deltaTime);
 
             // Bleed velocity
-            _velocity -= (_velocity / _mass) * Time.fixedDeltaTime;
+            _velocity -= (_velocity / _mass) * Time.deltaTime;
         }
 
         public void TranslateCamera(Vector3 a_translation)
@@ -69,21 +88,31 @@ namespace Sheeplosion
                 a_translation.y = 0.0f;
             }
 
+            _transform.Translate(a_translation * _speed);
+
             // Set velocity to desired translation
-            _velocity = a_translation * _speed;
+            _velocity = a_translation.normalized * _maxSpeed;
         }
 
         public void ZoomCamera(float a_amount)
         {
             if (_camera.orthographic)
             {
+                // Zoom camera
                 _camera.orthographicSize += a_amount * _zoomSpeed;
-                _camera.orthographicSize = Mathf.Max(_camera.orthographicSize, 0.1f);
+
+                // Ensure camera zoom is within limits
+                _camera.orthographicSize = Mathf.Max(_camera.orthographicSize, _minZoomHeight);
+                _camera.orthographicSize = Mathf.Min(_camera.orthographicSize, _maxZoomHeight);
             }
             else
             {
-                _camera.fieldOfView += a_amount * _zoomSpeed;
-                _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, 0.1f, 179.9f);
+                // Zoom camera
+                _camTransform.Translate(Vector3.forward * (a_amount * _zoomSpeed));
+
+                // Ensure camera zoom is within limits
+                _camTransform.localPosition = Vector3.Max(_camTransform.localPosition, Vector3.up * _minZoomHeight);
+                _camTransform.localPosition = Vector3.Min(_camTransform.localPosition, Vector3.up * _maxZoomHeight);
             }
         }
     }

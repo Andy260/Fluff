@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab913454589c324aa66eb825ad20c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionsAmount: 0
+  _explosionsAmount: 10
   _explodableLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -165,7 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7173358bf77bf654d8ab3820c5cbafc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: .100000001
+  _maxSpeed: 1.5
+  _zoomSpeed: .5
+  _mass: .5
+  _minZoomHeight: 9
+  _maxZoomHeight: 30
 --- !u!114 &11472722
 MonoBehaviour:
   m_ObjectHideFlags: 1
